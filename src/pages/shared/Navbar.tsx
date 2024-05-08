@@ -1,16 +1,14 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { RiMenu3Line } from "react-icons/ri";
 import { RxCross2 } from "react-icons/rx";
-import { IoSunnyOutline } from "react-icons/io5";
-import { FaMoon } from "react-icons/fa";
-import { ThemeContext } from "@/theme/ThemeConfig";
 import { IoIosSearch } from "react-icons/io";
-
 import UserAccount from "@/components/UserAccount";
 import darkModeLogo from "../../assets/images/HomeImg/logo-light-vHhBX6Zj.png";
 import lightModeLogo from "../../assets/images/HomeImg/logo-dark-Be4neTbs.png";
 import ShopAndFavourite from "@/components/ShopAndFavourite";
+import { useTheme } from "@/theme/useTheme";
+import { ModeToggle } from "@/theme/modeToggle";
 
 interface page {
   name: string;
@@ -74,11 +72,7 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
 
-  const { theme, setTheme } = useContext(ThemeContext);
-
-  const handleTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light");
-  };
+  const { theme } = useTheme();
 
   const { pathname } = useLocation();
 
@@ -126,17 +120,11 @@ const Navbar = () => {
                 required
               />
             </form>
-            <button onClick={handleTheme}>
-              {theme === "light" ? (
-                <FaMoon className="text-black text-lg" />
-              ) : (
-                <IoSunnyOutline className="block h-6 w-6 text-white" />
-              )}
-            </button>
+            <ModeToggle />
           </div>
 
           {user ? (
-            <div className="md:flex items-center hidden">
+            <div className="md:flex items-center hidden space-x-1">
               <ShopAndFavourite />
               <UserAccount style="mr-5" />
             </div>

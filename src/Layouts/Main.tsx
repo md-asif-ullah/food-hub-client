@@ -5,7 +5,9 @@ function Main() {
   return (
     <div className="max-w-8xl">
       <Navbar />
-      <Outlet />
+      <div className="mt-20">
+        <Outlet />
+      </div>
     </div>
   );
 }
