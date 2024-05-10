@@ -26,20 +26,22 @@ function Login() {
       <div className="lg:pl-20 pt-10 mx-5 sm:mx-40 lg:mx-0">
         <div className="text-center mx-auto">
           <div className="text-start">
-            <h3 className="text-4xl text-white font-medium">Login</h3>
+            <h3 className="text-4xl dark:text-white text-black font-medium">
+              Login
+            </h3>
             <p className="text-[#717aa1] text-sm mt-4">wellcome back to Yum</p>
           </div>
         </div>
 
         <form className="mt-5 w-full" onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-5">
-            <label className="block mb-2 text-sm font-medium text-gray-300">
+            <label className="block mb-2 text-sm font-medium dark:text-gray-300 text-black">
               Email
             </label>
             <input
               type="email"
               {...register("email", { required: true })}
-              className="bg-[#040717] border border-[#1e293b] text-white sm:text-sm rounded-lg block w-full p-2.5 outline-none focus:border-[#f58220] placeholder-gray-400"
+              className="bg-white dark:bg-[#040717] border text-black dark:text-white sm:text-sm rounded-lg block w-full p-2.5 outline-none focus:border-[#f58220] placeholder-gray-400"
               placeholder="Enter your email"
             />
             {errors.email && (
@@ -47,7 +49,7 @@ function Login() {
             )}
           </div>
           <div className="mb-5">
-            <label className="block mb-2 text-sm font-medium text-gray-300">
+            <label className="block mb-2 text-sm font-medium dark:text-gray-300 text-black">
               Password
             </label>
             <input
@@ -55,7 +57,7 @@ function Login() {
               {...register("password", {
                 required: true,
               })}
-              className="bg-[#040717] border border-[#1e293b] text-white sm:text-sm rounded-lg block w-full p-2.5 outline-none focus:border-[#f58220] placeholder-gray-400"
+              className="bg-white dark:bg-[#040717] border  text-black dark:text-white sm:text-sm rounded-lg block w-full p-2.5 outline-none focus:border-[#f58220] placeholder-gray-400"
               placeholder="Enter your password"
             />
             {errors.password && (
@@ -82,7 +84,7 @@ function Login() {
           </button>
         </form>
 
-        <p className="text-white mt-2 text-sm">
+        <p className="dark:text-white text-black mt-2 text-sm">
           Don't have an account?
           <Link className="text-[#f58220] ml-2" to="/register">
             Register

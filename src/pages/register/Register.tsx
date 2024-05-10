@@ -33,7 +33,9 @@ function Register() {
       <div className="lg:pl-20 pt-10 mx-5 sm:mx-40 lg:mx-0">
         <div className="text-center mx-auto">
           <div className="text-start">
-            <h3 className="text-4xl text-white font-medium">Register</h3>
+            <h3 className="text-4xl dark:text-white text-black font-medium">
+              Register
+            </h3>
             <p className="text-[#717aa1] text-sm mt-4">
               Don't have an account? Create your account, it takes less than a
               minute at Yum
@@ -43,12 +45,12 @@ function Register() {
 
         <form className="mt-5 w-full" onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-5">
-            <label className="block mb-2 text-sm font-medium text-gray-300">
+            <label className="block mb-2 text-sm font-medium text-black dark:text-gray-300">
               Name
             </label>
             <input
               type="text"
-              className="bg-[#040717] border border-[#1e293b] text-white sm:text-sm rounded-lg block w-full p-2.5 outline-none focus:border-[#f58220] placeholder-gray-400"
+              className="dark:bg-[#040717] bg-white border text-black dark:text-white sm:text-sm rounded-lg block w-full p-2.5 outline-none focus:border-[#f58220] placeholder-gray-400"
               placeholder="Enter your name"
               {...register("name", {
                 required: true,
@@ -63,13 +65,13 @@ function Register() {
             )}
           </div>
           <div className="mb-5">
-            <label className="block mb-2 text-sm font-medium text-gray-300">
+            <label className="block mb-2 text-sm font-medium text-black dark:text-gray-300">
               Email
             </label>
             <input
               type="email"
               {...register("email", { required: true })}
-              className="bg-[#040717] border border-[#1e293b] text-white sm:text-sm rounded-lg block w-full p-2.5 outline-none focus:border-[#f58220] placeholder-gray-400"
+              className="dark:bg-[#040717] bg-white border text-black dark:text-white sm:text-sm rounded-lg block w-full p-2.5 outline-none focus:border-[#f58220] placeholder-gray-400"
               placeholder="Enter your email"
             />
             {errors.email && (
@@ -77,7 +79,7 @@ function Register() {
             )}
           </div>
           <div className="mb-5">
-            <label className="block mb-2 text-sm font-medium text-gray-300">
+            <label className="block mb-2 text-sm font-medium text-black dark:text-gray-300">
               Password
             </label>
             <input
@@ -87,7 +89,7 @@ function Register() {
                 pattern:
                   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/,
               })}
-              className="bg-[#040717] border border-[#1e293b] text-white sm:text-sm rounded-lg block w-full p-2.5 outline-none focus:border-[#f58220] placeholder-gray-400"
+              className="dark:bg-[#040717] bg-white border  text-black dark:text-white sm:text-sm rounded-lg block w-full p-2.5 outline-none focus:border-[#f58220] placeholder-gray-400"
               placeholder="Enter your password"
             />
             {errors.password && (
@@ -98,13 +100,13 @@ function Register() {
             )}
           </div>
           <div className="mb-5">
-            <label className="block mb-2 text-sm font-medium text-gray-300">
+            <label className="block mb-2 text-sm font-medium text-black dark:text-gray-300">
               Confirm Password
             </label>
             <input
               type={checkbox ? "text" : "password"}
               {...register("confirmPassword", { required: true })}
-              className="bg-[#040717] border border-[#1e293b] text-white sm:text-sm rounded-lg block w-full p-2.5 outline-none focus:border-[#f58220] placeholder-gray-400"
+              className="dark:bg-[#040717] bg-white border text-black dark:text-white sm:text-sm rounded-lg block w-full p-2.5 outline-none focus:border-[#f58220] placeholder-gray-400"
               placeholder="Confirm your password"
             />
             {errors.confirmPassword && (
@@ -134,7 +136,7 @@ function Register() {
           </button>
         </form>
 
-        <p className="text-white mt-2 text-sm">
+        <p className="dark:text-white text-black mt-2 text-sm">
           Already have an account?
           <Link className="text-[#f58220] ml-2" to="/login">
             Login
