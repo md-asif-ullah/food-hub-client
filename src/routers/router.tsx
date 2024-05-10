@@ -2,6 +2,7 @@ import Main from "@/Layouts/Main";
 import Home from "@/pages/Home/Home";
 import Login from "@/pages/login/login";
 import Register from "@/pages/register/Register";
+import Verify from "@/pages/verify/Verify";
 import { createBrowserRouter } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/verify-email/:email",
+    element: <Verify />,
   },
 ]);
 

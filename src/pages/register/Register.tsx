@@ -1,7 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import authBg from "@/assets/images/authImg/auth-bg-WWHEDCJO.png";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useState } from "react";
+import axios, { AxiosError } from "axios";
+import { ApiResponse } from "@/components/ApiResponse";
 
 function Register() {
   interface IFormInput {
@@ -14,18 +16,40 @@ function Register() {
   const [checkbox, setCheckbox] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IFormInput>();
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
+  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     const { name, email, password, confirmPassword } = data;
     if (password !== confirmPassword) {
       setError("Passwords do not match");
       return;
     }
-    console.log(name, email, password, confirmPassword);
+    try {
+      const res = await axios.post("/api/users/process-register", {
+        name,
+        email,
+        password,
+      });
+      if (res.data.success) {
+        setError(null);
+        navigate(`/verify-email/${email}`);
+      }
+    } catch (error) {
+      const exiosError = error as AxiosError<ApiResponse>;
+      if (exiosError.response) {
+        setError(
+          exiosError.response.data.message ||
+            "An error occurred. Please try again later."
+        );
+      } else {
+        setError("An error occurred. Please try again later.");
+      }
+    }
   };
 
   return (
