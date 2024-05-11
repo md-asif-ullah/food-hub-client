@@ -78,3 +78,6 @@
 .primary_button {
   @apply focus:outline-none font-medium duration-500 rounded-lg text-base w-full px-5 py-2.5 text-center;
 }
+.secondary_button {
+  @apply rounded-xl duration-500 border py-2 text-xl;
+}
