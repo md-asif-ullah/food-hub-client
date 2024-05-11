@@ -5,6 +5,7 @@ import { useState } from "react";
 import axios, { AxiosError } from "axios";
 import { ApiResponse } from "@/components/ApiResponse";
 import { useToast } from "@/components/ui/use-toast";
+import SocialLogin from "@/components/SocialLogin";
 
 function Login() {
   const [checkbox, setCheckbox] = useState<boolean>(false);
@@ -105,7 +106,7 @@ function Login() {
 
           <button
             type="submit"
-            className="text-white bg-[#f58220] hover:bg-[#f07167] focus:outline-none font-medium duration-500 rounded-lg text-base w-full px-5 py-2.5 text-center"
+            className="text-white bg-[#f58220] hover:bg-orange-700 primary_button"
           >
             Login
           </button>
@@ -117,6 +118,8 @@ function Login() {
             Register
           </Link>
         </p>
+
+        <SocialLogin />
       </div>
       <div className=" hidden lg:block">
         <img src={authBg} alt="Authentication Background" />
