@@ -81,3 +81,6 @@
 .secondary_button {
   @apply rounded-xl duration-500 border py-2 text-xl;
 }
+.hover_effcet {
+  @apply cursor-pointer hover:text-[#f58220] duration-300;
+}
