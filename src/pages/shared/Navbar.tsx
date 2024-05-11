@@ -80,17 +80,19 @@ const Navbar = () => {
     <nav className="dark:bg-[#030617] bg-white fixed w-full top-0">
       <div className="px-4 sm:px-6 lg:px-10 border-gray-300 border-b dark:border-b-0">
         <div className="flex justify-between items-center  h-20">
-          <div className="hidden sm:block">
-            {theme === "light" ? (
-              <img className="sm:w-36 w-32 " src={lightModeLogo} alt="logo" />
-            ) : (
-              <img
-                className="sm:w-36 w-32 sm:block"
-                src={darkModeLogo}
-                alt="logo"
-              />
-            )}
-          </div>
+          <Link to="/">
+            <div className="hidden sm:block">
+              {theme === "light" ? (
+                <img className="sm:w-36 w-32 " src={lightModeLogo} alt="logo" />
+              ) : (
+                <img
+                  className="sm:w-36 w-32 sm:block"
+                  src={darkModeLogo}
+                  alt="logo"
+                />
+              )}
+            </div>
+          </Link>
 
           <div className="hidden lg:flex">
             {pages.map((page, index) => (
