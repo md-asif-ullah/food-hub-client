@@ -1,24 +1,50 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import authBg from "@/assets/images/authImg/auth-bg-WWHEDCJO.png";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useState } from "react";
+import axios, { AxiosError } from "axios";
+import { ApiResponse } from "@/components/ApiResponse";
+import { useToast } from "@/components/ui/use-toast";
 
 function Login() {
+  const [checkbox, setCheckbox] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const { toast } = useToast();
+  const navigate = useNavigate();
+
   interface IFormInput {
     email: string;
     password: string;
   }
-  const [checkbox, setCheckbox] = useState<boolean>(false);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IFormInput>();
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    const { email, password } = data;
-
-    console.log(email, password);
+  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+    try {
+      const res = await axios.post("/api/auth", data);
+      if (res.data.success) {
+        setError(null);
+        navigate("/");
+        toast({
+          title: "sign in successfully",
+          description: "You can now login to your account.",
+        });
+      }
+    } catch (error) {
+      const exiosError = error as AxiosError<ApiResponse>;
+      if (exiosError.response) {
+        setError(
+          exiosError.response.data.message ||
+            "An error occurred. Please try again later."
+        );
+      } else {
+        setError("An error occurred. Please try again later.");
+      }
+    }
   };
 
   return (
@@ -63,6 +89,7 @@ function Login() {
             {errors.password && (
               <small className="text-red-500">password is required</small>
             )}
+            <small className="text-red-600">{error}</small>
           </div>
 
           <div className="flex items-center mb-4">
