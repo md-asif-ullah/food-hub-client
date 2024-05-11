@@ -1,12 +1,14 @@
 import AboutUs from "./home/About";
+import AppInfo from "./home/AppInfo";
 import Hero from "./home/Hero";
 
 function Home() {
   return (
-    <div>
+    <>
       <Hero />
       <AboutUs />
-    </div>
+      <AppInfo />
+    </>
   );
 }
 
