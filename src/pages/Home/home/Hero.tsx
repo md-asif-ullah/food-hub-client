@@ -50,12 +50,12 @@ function Hero() {
             />
           </div>
           <div className="mt-5">
-            <p className="text-white">Our Happy Customers</p>
+            <p className="dark:text-white text-black">Our Happy Customers</p>
             <div className="flex justify-center lg:justify-start">
               <i className=" text-[#facc15] mt-1 mr-1">
                 <IoIosStar className="" />
               </i>
-              <p className=" text-white">
+              <p className="text-black dark:text-white">
                 4.7
                 <span className="text-[#444f63]">(13.7k Reviews)</span>
               </p>
