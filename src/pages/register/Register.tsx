@@ -24,6 +24,7 @@ function Register() {
     handleSubmit,
     formState: { errors },
   } = useForm<IFormInput>();
+
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     const { name, email, password, confirmPassword } = data;
     if (password !== confirmPassword) {
