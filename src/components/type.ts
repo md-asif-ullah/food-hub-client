@@ -35,3 +35,8 @@ export interface users {
   message: string;
   payload: User[];
 }
+
+export interface IVerify {
+  email: string;
+  verificationCode: string;
+}

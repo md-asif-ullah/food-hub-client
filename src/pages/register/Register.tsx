@@ -22,7 +22,7 @@ function Register() {
   const [error, setError] = useState<string | null>(null);
 
   const navigate = useNavigate();
-  const toast = useToast();
+  const { toast } = useToast();
 
   const {
     register,
@@ -40,18 +40,20 @@ function Register() {
       const res = await processRegister({ name, email, password }).unwrap();
 
       if (res.success) {
-        toast.toast({
+        toast({
           title: "verification code sent successfully",
           description: res.message,
         });
-        navigate("/");
+        navigate(`/verify-email/${email}`);
       }
-    } catch (error) {
-      toast.toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Something went wrong. Please try again.",
-      });
+    } catch (error: any) {
+      if (error.data) {
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: error.data.message,
+        });
+      }
     }
   };
 
