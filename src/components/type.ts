@@ -40,3 +40,8 @@ export interface IVerify {
   email: string;
   verificationCode: string;
 }
+
+export interface ILogin {
+  email: string;
+  password: string;
+}

@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { IResponse, IVerify, UserData } from "@/components/type";
+import { ILogin, IResponse, IVerify, UserData } from "@/components/type";
 
 export const userApi = createApi({
   reducerPath: "userApi",
@@ -22,7 +22,19 @@ export const userApi = createApi({
       }),
       invalidatesTags: ["Post"],
     }),
+    loginUser: build.mutation<IResponse, Omit<ILogin, "id">>({
+      query: (body) => ({
+        url: "/api/auth",
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["Post"],
+    }),
   }),
 });
 
-export const { useProcessRegisterMutation, useVerifyUserMutation } = userApi;
+export const {
+  useProcessRegisterMutation,
+  useVerifyUserMutation,
+  useLoginUserMutation,
+} = userApi;

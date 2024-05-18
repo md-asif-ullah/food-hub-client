@@ -2,48 +2,42 @@ import { Link, useNavigate } from "react-router-dom";
 import authBg from "@/assets/images/authImg/auth-bg-WWHEDCJO.png";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useState } from "react";
-import axios, { AxiosError } from "axios";
-import { ApiResponse } from "@/components/ApiResponse";
 import { useToast } from "@/components/ui/use-toast";
 import SocialLogin from "@/components/SocialLogin";
+import { ILogin } from "@/components/type";
+import { useLoginUserMutation } from "@/redux/services/User";
+import ProssingAnimation from "@/components/ProssingAnimation";
 
 function Login() {
   const [checkbox, setCheckbox] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+  const [loginUser, { isLoading }] = useLoginUserMutation();
 
   const { toast } = useToast();
   const navigate = useNavigate();
-
-  interface IFormInput {
-    email: string;
-    password: string;
-  }
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IFormInput>();
-  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+  } = useForm<ILogin>();
+  const onSubmit: SubmitHandler<ILogin> = async (data) => {
     try {
-      const res = await axios.post("/api/auth", data);
-      if (res.data.success) {
-        setError(null);
+      const res = await loginUser(data).unwrap();
+
+      if (res.success) {
         navigate("/");
         toast({
           title: "sign in successfully",
           description: "You can now login to your account.",
         });
       }
-    } catch (error) {
-      const exiosError = error as AxiosError<ApiResponse>;
-      if (exiosError.response) {
-        setError(
-          exiosError.response.data.message ||
-            "An error occurred. Please try again later."
-        );
-      } else {
-        setError("An error occurred. Please try again later.");
+    } catch (error: any) {
+      if (error.data) {
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: error.data.message,
+        });
       }
     }
   };
@@ -90,7 +84,6 @@ function Login() {
             {errors.password && (
               <small className="text-red-500">password is required</small>
             )}
-            <small className="text-red-600">{error}</small>
           </div>
 
           <div className="flex items-center mb-4">
@@ -106,9 +99,10 @@ function Login() {
 
           <button
             type="submit"
-            className="text-white bg-[#f58220] hover:bg-orange-700 primary_button"
+            disabled={isLoading}
+            className="text-white mt-5 bg-[#f58220] hover:bg-orange-700 primary_button"
           >
-            Login
+            {isLoading ? <ProssingAnimation /> : "Login"}
           </button>
         </form>
 
