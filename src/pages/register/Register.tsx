@@ -1,10 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
-import authBg from "@/assets/images/authImg/auth-bg-WWHEDCJO.png";
-import { SubmitHandler, useForm } from "react-hook-form";
 import { useState } from "react";
-import axios, { AxiosError } from "axios";
-import { ApiResponse } from "@/components/ApiResponse";
+import { SubmitHandler, useForm } from "react-hook-form";
+
+import authBg from "@/assets/images/authImg/auth-bg-WWHEDCJO.png";
 import SocialLogin from "@/components/SocialLogin";
+import { useProcessRegisterMutation } from "@/redux/services/User";
+import { useToast } from "@/components/ui/use-toast";
+import ProssingAnimation from "@/components/ProssingAnimation";
 
 function Register() {
   interface IFormInput {
@@ -14,10 +16,13 @@ function Register() {
     confirmPassword: string;
   }
 
+  const [processRegister, { isLoading }] = useProcessRegisterMutation();
+
   const [checkbox, setCheckbox] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   const navigate = useNavigate();
+  const toast = useToast();
 
   const {
     register,
@@ -32,25 +37,21 @@ function Register() {
       return;
     }
     try {
-      const res = await axios.post("/api/users/process-register", {
-        name,
-        email,
-        password,
-      });
-      if (res.data.success) {
-        setError(null);
-        navigate(`/verify-email/${email}`);
+      const res = await processRegister({ name, email, password }).unwrap();
+
+      if (res.success) {
+        toast.toast({
+          title: "verification code sent successfully",
+          description: res.message,
+        });
+        navigate("/");
       }
     } catch (error) {
-      const exiosError = error as AxiosError<ApiResponse>;
-      if (exiosError.response) {
-        setError(
-          exiosError.response.data.message ||
-            "An error occurred. Please try again later."
-        );
-      } else {
-        setError("An error occurred. Please try again later.");
-      }
+      toast.toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Something went wrong. Please try again.",
+      });
     }
   };
 
@@ -156,9 +157,10 @@ function Register() {
 
           <button
             type="submit"
-            className="text-white bg-[#f58220] hover:bg-orange-700 primary_button"
+            disabled={isLoading}
+            className="text-white mt-5 bg-[#f58220] hover:bg-orange-700 primary_button"
           >
-            Register
+            {isLoading ? <ProssingAnimation /> : "Register"}
           </button>
         </form>
 
