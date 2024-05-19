@@ -7,6 +7,8 @@ import SocialLogin from "@/components/SocialLogin";
 import { ILogin } from "@/components/type";
 import { useLoginUserMutation } from "@/redux/services/User";
 import ProssingAnimation from "@/components/ProssingAnimation";
+import { setUser } from "@/redux/user/UserSlice";
+import { useDispatch } from "react-redux";
 
 function Login() {
   const [checkbox, setCheckbox] = useState<boolean>(false);
@@ -14,6 +16,7 @@ function Login() {
 
   const { toast } = useToast();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -23,6 +26,7 @@ function Login() {
   const onSubmit: SubmitHandler<ILogin> = async (data) => {
     try {
       const res = await loginUser(data).unwrap();
+      dispatch(setUser(res.payload));
 
       if (res.success) {
         navigate("/");

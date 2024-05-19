@@ -7,12 +7,18 @@ import Theme from "./theme/theme.tsx";
 import { Toaster } from "./components/ui/toaster.tsx";
 import { Provider } from "react-redux";
 import { store } from "./redux/Store.tsx";
+import { persistStore } from "redux-persist";
+import { PersistGate } from "redux-persist/integration/react";
+
+const persistor = persistStore(store);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Theme>
       <Provider store={store}>
-        <RouterProvider router={router} />
+        <PersistGate loading={null} persistor={persistor}>
+          <RouterProvider router={router} />
+        </PersistGate>
       </Provider>
       <Toaster />
     </Theme>

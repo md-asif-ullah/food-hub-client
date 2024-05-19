@@ -9,6 +9,8 @@ import lightModeLogo from "../../assets/images/HomeImg/logo-dark-Be4neTbs.png";
 import ShopAndFavourite from "@/components/ShopAndFavourite";
 import { useTheme } from "@/theme/useTheme";
 import { ModeToggle } from "@/theme/modeToggle";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/Store";
 
 interface page {
   name: string;
@@ -61,11 +63,10 @@ const pages: page[] = [
     path: "/contact",
   },
 ];
-// TODO: if user is logged in, show the user icon, otherwise show the login and register buttons
-
-const user = false;
 
 const Navbar = () => {
+  const user = useSelector((state: RootState) => state.user.currentUser);
+
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleNavbar = () => {
