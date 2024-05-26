@@ -13,10 +13,12 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import { productApi } from "./services/ProductService";
 
 const rootReducer = combineReducers({
   [contectApi.reducerPath]: contectApi.reducer,
   [userApi.reducerPath]: userApi.reducer,
+  [productApi.reducerPath]: productApi.reducer,
   user: userReducer,
 });
 
@@ -35,7 +37,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(contectApi.middleware, userApi.middleware),
+    }).concat(contectApi.middleware, userApi.middleware, productApi.middleware),
 });
 export type RootState = ReturnType<typeof store.getState>;
 

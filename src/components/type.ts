@@ -45,3 +45,9 @@ export interface ILogin {
   email: string;
   password: string;
 }
+
+export interface products {
+  statusCode: number;
+  message: string;
+  payload: any;
+}

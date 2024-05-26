@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { RiMenu3Line } from "react-icons/ri";
 import { RxCross2 } from "react-icons/rx";
 import { IoIosSearch } from "react-icons/io";
@@ -11,10 +11,14 @@ import { useTheme } from "@/theme/useTheme";
 import { ModeToggle } from "@/theme/modeToggle";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/Store";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 interface page {
   name: string;
   path: string;
+}
+interface Inputs {
+  search: string;
 }
 
 const sidePages: page[] = [
@@ -76,9 +80,17 @@ const Navbar = () => {
   const { theme } = useTheme();
 
   const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  const { handleSubmit, register } = useForm<Inputs>();
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    const urlparams = new URLSearchParams();
+    urlparams.set("search", data.search);
+    navigate(`/dishes?${urlparams.toString()}`);
+  };
 
   return (
-    <nav className="dark:bg-[#030617] bg-white fixed w-full top-0">
+    <nav className="dark:bg-[#030617] bg-white sticky z-10 w-full top-0">
       <div className="px-4 sm:px-6 lg:px-10 border-gray-300 border-b dark:border-b-0">
         <div className="flex justify-between items-center  h-20">
           <Link to="/">
@@ -112,13 +124,16 @@ const Navbar = () => {
           </div>
 
           <div className="inline-flex">
-            <form className="max-w-52 mx-auto mr-10 relative">
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="max-w-52 mx-auto mr-10 relative"
+            >
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                 <IoIosSearch className="text-lg text-black dark:text-white" />
               </div>
               <input
                 type="search"
-                id="default-search"
+                {...register("search")}
                 className="block w-full py-3 pl-10 text-sm rounded-lg focus:outline-none dark:bg-slate-800 text-black dark:text-white dark:border-black border-2"
                 required
               />

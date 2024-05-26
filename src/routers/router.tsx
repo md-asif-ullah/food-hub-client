@@ -1,6 +1,7 @@
 import Main from "@/Layouts/Main";
 import Home from "@/pages/Home/Home";
 import ContectUs from "@/pages/contact/Contact";
+import Dishes from "@/pages/dishes/Dishes";
 import ErrorPage from "@/pages/error/ErrorPage";
 import Login from "@/pages/login/login";
 import Register from "@/pages/register/Register";
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <ContectUs />,
+      },
+      {
+        path: "/dishes",
+        element: <Dishes />,
       },
     ],
   },
