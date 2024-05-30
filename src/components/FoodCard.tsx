@@ -15,7 +15,7 @@ function FoodCard({ product }: product) {
 
   return (
     <div
-      className={`border border-stone-800 group relative hover:border-orange-500 transition duration-300 dark:bg-[#020617] bg-white rounded-lg p-3 h-[420px] cursor-pointer`}
+      className={`border border-stone-800 group relative hover:border-orange-500 transition duration-300 dark:bg-[#020617] bg-white rounded-lg p-3 pb-20 cursor-pointer`}
     >
       <img
         className="h-[255px] w-full lg:h-[210px] object-cover rounded-md"
