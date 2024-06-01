@@ -4,6 +4,7 @@ import ContectUs from "@/pages/contact/Contact";
 import Dishes from "@/pages/dishes/Dishes";
 import ErrorPage from "@/pages/error/ErrorPage";
 import Login from "@/pages/login/login";
+import Product from "@/pages/productDetails/Product";
 import Register from "@/pages/register/Register";
 import Verify from "@/pages/verify/Verify";
 import { createBrowserRouter } from "react-router-dom";
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "/dishes",
         element: <Dishes />,
+      },
+      {
+        path: "/product/:id",
+        element: <Product />,
       },
     ],
   },

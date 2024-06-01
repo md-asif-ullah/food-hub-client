@@ -50,7 +50,7 @@ const Dishes = () => {
   const checkboxText = ["Coffee", "Pizza", "Burger", "Noodles", "Dessert"];
 
   return (
-    <div className="grid lg:grid-cols-4 xl:px-14 px-4 relative h-full min-h-[200vh] lg:min-h-0">
+    <div className="grid lg:grid-cols-4 xl:px-14 px-4 relative h-full min-h-[200vh] lg:min-h-0 pt-32">
       <BigDeviceFiltering
         checkboxText={checkboxText}
         setSearchParams={setSearchParams}
@@ -66,7 +66,7 @@ const Dishes = () => {
         />
       )}
 
-      <div className="col-span-3 pt-28">
+      <div className="col-span-3 ">
         <div>
           <button
             onClick={() => setMobileFilter(!mobileFilter)}

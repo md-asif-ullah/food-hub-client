@@ -87,7 +87,7 @@ function BigDeviceFiltering({
   };
 
   return (
-    <div className="mr-10 pt-20 lg:block hidden lg:relative">
+    <div className="mr-10 lg:block hidden lg:relative">
       <h1 className="text-lg">CATEGORY</h1>
 
       <div className="mt-5">
