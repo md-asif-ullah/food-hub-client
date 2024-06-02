@@ -51,3 +51,10 @@ export interface products {
   message: string;
   payload: any;
 }
+
+export interface IProduct {
+  name: string;
+  price: number;
+  image: string;
+  size: string;
+}

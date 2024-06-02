@@ -9,15 +9,52 @@ import { IoCartOutline } from "react-icons/io5";
 import { useState } from "react";
 import FoodCard from "@/components/FoodCard";
 import Rating from "@/components/Rating";
+import { useToast } from "@/components/ui/use-toast";
+import ProssingAnimation from "@/components/ProssingAnimation";
+import { useAddToCartMutation } from "@/redux/services/CartService";
+import { IProduct } from "@/components/type";
 
 function Product() {
   const { id } = useParams<{ id: string }>();
   const { data, error, isLoading } = useGetProductQuery(id!);
   const { data: popularProduct } = useGetPopularProductsQuery();
+  const [addToCart, { isLoading: addingProduct }] = useAddToCartMutation();
 
   const [buttonStyle, setButtonStyle] = useState<string>("");
+  const [size, setSize] = useState<string>("");
 
-  const { image, name, price, description, rating } = data?.payload || {};
+  const product = data?.payload || {};
+  const { name, price, image, description, rating } = product;
+
+  const { toast } = useToast();
+
+  const handleSumit = async (product: IProduct) => {
+    const newProduct = {
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      size: size,
+    };
+    console.log(newProduct);
+    try {
+      const res = await addToCart(newProduct).unwrap();
+      if (res.success) {
+        toast({
+          title: "Success",
+          description: res.message,
+        });
+      }
+    } catch (error: any) {
+      if (error.data) {
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: error.data.message,
+        });
+      }
+    }
+  };
+
   return (
     <div className="mt-32 h-full mx-5 md:mx-10 xl:mx-20">
       {isLoading && <LoadingAnimation />}
@@ -44,7 +81,9 @@ function Product() {
             <p className="mt-2">Size:</p>
             <div className="flex items-center mt-3 space-x-2">
               <button
-                onClick={() => setButtonStyle("s")}
+                onClick={() => {
+                  return setButtonStyle("s"), setSize("small");
+                }}
                 className={`px-3 py-[3px] rounded-full  ${
                   buttonStyle === "s" ? "bg-[#f58220]" : "bg-[#1e293b]"
                 }`}
@@ -52,7 +91,9 @@ function Product() {
                 S
               </button>
               <button
-                onClick={() => setButtonStyle("m")}
+                onClick={() => {
+                  return setButtonStyle("m"), setSize("medium");
+                }}
                 className={`px-[10px] py-[4px] rounded-full  ${
                   buttonStyle === "m" ? "bg-[#f58220]" : "bg-[#1e293b]"
                 }`}
@@ -60,7 +101,9 @@ function Product() {
                 M
               </button>
               <button
-                onClick={() => setButtonStyle("l")}
+                onClick={() => {
+                  return setButtonStyle("l"), setSize("large");
+                }}
                 className={`px-3 py-[4px] rounded-full  ${
                   buttonStyle === "l" ? "bg-[#f58220]" : "bg-[#1e293b]"
                 }`}
@@ -70,10 +113,21 @@ function Product() {
             </div>
           </div>
           <div className="flex items-center mt-10 space-x-2">
-            <button className="secondary_button inline-flex bg-[#f58220] hover:bg-orange-700 px-4 space-x-2">
-              <IoCartOutline />
-              <span className="text-base">Add to Cart</span>
+            <button
+              onClick={() => handleSumit(product)}
+              disabled={addingProduct}
+              className="secondary_button inline-flex bg-[#f58220] hover:bg-orange-700 px-4 space-x-2"
+            >
+              {addingProduct ? (
+                <ProssingAnimation />
+              ) : (
+                <>
+                  <IoCartOutline />
+                  <span className="text-base">Add to Cart</span>
+                </>
+              )}
             </button>
+
             <MdOutlineFavorite className="hover_effcet text-3xl bg-black hover:text-red-600" />
           </div>
         </div>

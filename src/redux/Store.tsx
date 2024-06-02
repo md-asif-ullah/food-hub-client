@@ -14,11 +14,14 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { productApi } from "./services/ProductService";
+import { cartApi } from "./services/CartService";
 
 const rootReducer = combineReducers({
   [contectApi.reducerPath]: contectApi.reducer,
   [userApi.reducerPath]: userApi.reducer,
   [productApi.reducerPath]: productApi.reducer,
+  [cartApi.reducerPath]: cartApi.reducer,
+
   user: userReducer,
 });
 
