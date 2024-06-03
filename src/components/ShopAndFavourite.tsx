@@ -1,14 +1,17 @@
+import { useGetCartItemQuery } from "@/redux/services/CartService";
 import { IoCartOutline } from "react-icons/io5";
 import { MdOutlineFavorite } from "react-icons/md";
 import { Link } from "react-router-dom";
 
 function ShopAndFavourite() {
+  const { data: cartProduct } = useGetCartItemQuery();
+
   return (
     <>
       <Link to="/cart">
         <div className="relative inline-flex items-center p-3 text-sm font-medium text-center">
           <div className="absolute inline-flex items-center justify-center md:w-6 md:h-6 w-5 h-5 text-xs font-bold text-white bg-[#f58220] rounded-full top-0 right-0 ">
-            20
+            {cartProduct?.payload?.length}
           </div>
           <IoCartOutline className="text-2xl dark:text-[#c2c7d0] text-black" />
         </div>

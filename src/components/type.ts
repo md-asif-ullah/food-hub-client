@@ -53,8 +53,16 @@ export interface products {
 }
 
 export interface IProduct {
+  _id: string;
   name: string;
   price: number;
   image: string;
   size: string;
+}
+
+export interface ICartProduct {
+  statusCode: number;
+  success: boolean;
+  message: string;
+  payload?: IProduct[];
 }

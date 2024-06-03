@@ -1,5 +1,6 @@
 import Main from "@/Layouts/Main";
 import Home from "@/pages/Home/Home";
+import Cart from "@/pages/cart/Cart";
 import ContectUs from "@/pages/contact/Contact";
 import Dishes from "@/pages/dishes/Dishes";
 import ErrorPage from "@/pages/error/ErrorPage";
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/product/:id",
         element: <Product />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
     ],
   },
