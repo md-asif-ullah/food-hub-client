@@ -66,3 +66,17 @@ export interface ICartProduct {
   message: string;
   payload?: IProduct[];
 }
+
+type review = {
+  _id: string;
+  name: string;
+  image: string;
+  rating: number;
+  comment: string;
+};
+
+export interface reviews {
+  statusCode: number;
+  message: string;
+  payload: review[];
+}

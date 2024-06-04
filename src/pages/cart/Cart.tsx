@@ -8,7 +8,6 @@ import { useState } from "react";
 function Cart() {
   const { data, isLoading, isError } = useGetCartItemQuery();
   const [quantityPrice, setQuantityPrice] = useState(null);
-  console.log(data, isLoading, isError);
 
   const quantityTotalPrice = (price: any) => {
     setQuantityPrice((prev) => prev + price);
