@@ -1,17 +1,6 @@
+import { User } from "@/components/type";
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-
-type User = {
-  createdAt: string;
-  email: string;
-  image: string;
-  isAdmin: boolean;
-  isBanned: boolean;
-  isVarified: boolean;
-  name: string;
-  updatedAt: string;
-  _id: string;
-};
 
 export interface UserState {
   currentUser: User | null;

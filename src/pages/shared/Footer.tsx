@@ -1,3 +1,4 @@
+import { Separator } from "@/components/ui/separator";
 import moment from "moment";
 import { FaPhone, FaFacebookF, FaXTwitter } from "react-icons/fa6";
 
@@ -77,7 +78,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <hr className="mt-6 border-[#e2e8f0] dark:border-[#1e293b] sm:mx-auto lg:mt-8" />
+      <Separator />
 
       {/* copyright worning */}
 

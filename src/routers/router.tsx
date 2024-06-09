@@ -1,4 +1,7 @@
+import Profile from "@/Deshbord/Profile/Profile";
+import Deshboard from "@/Layouts/Deshboard";
 import Main from "@/Layouts/Main";
+import VerifyOtp from "@/components/VarifyOtp";
 import About from "@/pages/About/About";
 import Home from "@/pages/Home/Home";
 import Cart from "@/pages/cart/Cart";
@@ -54,6 +57,36 @@ const router = createBrowserRouter([
   {
     path: "/verify-email/:email",
     element: <Verify />,
+  },
+  {
+    path: "/verify-otp/:email",
+    element: <VerifyOtp />,
+  },
+  {
+    path: "/deshbord",
+    element: <Deshboard />,
+    children: [
+      {
+        path: "/deshbord/profile",
+        element: <Profile />,
+      },
+      // {
+      //   path: "/deshbord/myOrders",
+      //   element: <MyOrders />,
+      // },
+      // {
+      //   path: "/deshbord/customers",
+      //   element: <Customers />,
+      // },
+      // {
+      //   path: "/deshbord/editCusInfo/:id",
+      //   element: <EditUserInfo />,
+      // },
+      // {
+      //   path: "/deshbord/additem",
+      //   element: <AddItem />,
+      // },
+    ],
   },
 ]);
 

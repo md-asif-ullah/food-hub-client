@@ -18,20 +18,23 @@ export interface UserData {
   password: string;
 }
 
-type User = {
+export interface User {
   createdAt: string;
   email: string;
   image: string;
+  gender: string | undefined;
+  birthday: string | undefined;
+  phone: string | undefined;
   isAdmin: boolean;
   isBanned: boolean;
-  isVarified: boolean;
+  isVerified: boolean;
   name: string;
   updatedAt: string;
   _id: string;
-};
+}
 
-export interface users {
-  statusCode: any;
+export interface UsersResponse {
+  statusCode: number;
   message: string;
   payload: User[];
 }

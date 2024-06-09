@@ -11,7 +11,7 @@ function ShopAndFavourite() {
       <Link to="/cart">
         <div className="relative inline-flex items-center p-3 text-sm font-medium text-center">
           <div className="absolute inline-flex items-center justify-center md:w-6 md:h-6 w-5 h-5 text-xs font-bold text-white bg-[#f58220] rounded-full top-0 right-0 ">
-            {cartProduct?.payload?.length}
+            {cartProduct?.payload?.length || 0}
           </div>
           <IoCartOutline className="text-2xl dark:text-[#c2c7d0] text-black" />
         </div>
