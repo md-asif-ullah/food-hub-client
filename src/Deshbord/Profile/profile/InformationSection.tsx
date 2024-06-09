@@ -2,7 +2,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { RootState } from "@/redux/Store";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Calendar } from "@/components/ui/calendar";
 import { Input } from "@/components/ui/input";
 import {
@@ -16,6 +16,8 @@ import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useUpdateUserInfoMutation } from "@/redux/services/User";
+import { useToast } from "@/components/ui/use-toast";
+import { setUser } from "@/redux/user/UserSlice";
 
 interface IFormInfoInput {
   name: string;
@@ -25,6 +27,9 @@ interface IFormInfoInput {
 function InformationSection() {
   const [updateUserInfo, { data, isLoading }] = useUpdateUserInfoMutation();
 
+  const { toast } = useToast();
+  const dispatch = useDispatch();
+
   const user = useSelector((state: RootState) => state.user.currentUser);
   const { name, gender, birthday, _id } = user || {};
 
@@ -32,14 +37,30 @@ function InformationSection() {
   const [showInfo, setShowInfo] = useState<boolean>(true);
 
   const { register, handleSubmit } = useForm<IFormInfoInput>();
-  const onSubmit: SubmitHandler<IFormInfoInput> = (info) => {
+  const onSubmit: SubmitHandler<IFormInfoInput> = async (info) => {
     const day = date?.getDate();
     const month = date?.getMonth();
     const year = date?.getFullYear();
     const newInfo = { ...info, birthday: `${day}/${month}/${year}` };
-    console.log(newInfo);
 
-    updateUserInfo({ id: _id, body: newInfo });
+    try {
+      const res = await updateUserInfo({ id: _id, body: newInfo }).unwrap();
+      dispatch(setUser(res.payload));
+
+      if (res.success) {
+        toast({
+          description: "Your information has been updated.",
+        });
+      }
+    } catch (error: any) {
+      if (error.data) {
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: error.data.message,
+        });
+      }
+    }
   };
 
   console.log(data, isLoading);
@@ -88,13 +109,16 @@ function InformationSection() {
                 )}
               >
                 <CalendarIcon className="mr-2 h-4 w-4" />
-                {date ? format(date, "PPP") : <span>Pick a date</span>}
+                {date ? (
+                  format(date, "PPP")
+                ) : (
+                  <span>{birthday ? birthday : "Pick a date"}</span>
+                )}
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0">
               <Calendar
                 mode="single"
-                defaultMonth={birthday ? new Date(birthday) : new Date()}
                 selected={date}
                 onSelect={setDate}
                 initialFocus
@@ -108,7 +132,7 @@ function InformationSection() {
           </label>
           <RadioGroup
             {...register("gender")}
-            defaultChecked={!gender}
+            defaultValue={gender}
             className="flex space-x-5"
           >
             <div className="flex items-center space-x-2">
