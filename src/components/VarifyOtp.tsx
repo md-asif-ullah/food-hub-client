@@ -9,7 +9,7 @@ import ProssingAnimation from "./ProssingAnimation";
 import { Button } from "./ui/button";
 
 interface VerifyOtpProps {
-  buttonText: string;
+  buttonText?: string;
 }
 
 function VerifyOtp({ buttonText }: VerifyOtpProps) {

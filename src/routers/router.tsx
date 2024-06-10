@@ -70,22 +70,6 @@ const router = createBrowserRouter([
         path: "/deshbord/profile",
         element: <Profile />,
       },
-      // {
-      //   path: "/deshbord/myOrders",
-      //   element: <MyOrders />,
-      // },
-      // {
-      //   path: "/deshbord/customers",
-      //   element: <Customers />,
-      // },
-      // {
-      //   path: "/deshbord/editCusInfo/:id",
-      //   element: <EditUserInfo />,
-      // },
-      // {
-      //   path: "/deshbord/additem",
-      //   element: <AddItem />,
-      // },
     ],
   },
 ]);

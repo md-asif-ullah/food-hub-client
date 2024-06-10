@@ -11,6 +11,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Link } from "react-router-dom";
+import { useLogOutMutation } from "@/redux/services/User";
+import { useDispatch } from "react-redux";
+import { clearUser } from "@/redux/user/UserSlice";
+import { useToast } from "./ui/use-toast";
 
 interface Pagetype {
   label: string;
@@ -27,6 +31,34 @@ const DeshbordPage: Pagetype[] = [
 ];
 
 function UserAccount({ style }: { style?: string }) {
+  const dispatch = useDispatch();
+  const { toast } = useToast();
+
+  const [logOut, { isLoading, isError }] = useLogOutMutation();
+  console.log(isLoading, isError);
+
+  const handleLogOut = async () => {
+    try {
+      const res = await logOut().unwrap();
+
+      if (res.success) {
+        dispatch(clearUser());
+        toast({
+          title: "sign out successfully",
+          description: "You can now login to your account.",
+        });
+      }
+    } catch (error: any) {
+      if (error.data) {
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: error.data.message,
+        });
+      }
+    }
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -47,7 +79,7 @@ function UserAccount({ style }: { style?: string }) {
             </Link>
           ))}
         </DropdownMenuGroup>
-        <DropdownMenuItem>
+        <DropdownMenuItem onClick={handleLogOut}>
           <LogOut className="mr-2 h-4 w-4" />
           <span>Log out</span>
         </DropdownMenuItem>

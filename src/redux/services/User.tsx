@@ -52,6 +52,13 @@ export const userApi = createApi({
         body,
       }),
     }),
+
+    logOut: build.mutation<IResponse, void>({
+      query: () => ({
+        url: "/auth/logout",
+        method: "POST",
+      }),
+    }),
   }),
 });
 
@@ -60,4 +67,5 @@ export const {
   useVerifyUserMutation,
   useLoginUserMutation,
   useUpdateUserInfoMutation,
+  useLogOutMutation,
 } = userApi;
