@@ -12,12 +12,15 @@ function NumberSection() {
   const [showMobile, setShowMobile] = useState<boolean>(true);
   const [showMobileVerifyOtp, setShowMobileVerifyOtp] =
     useState<boolean>(false);
-  const handleMobileNumber: React.FormEventHandler<HTMLFormElement> = (e) => {
+
+  // TODO: Implement handleMobileNumber
+  const handleMobileNumber: React.FormEventHandler<HTMLDivElement> = (e) => {
     e.preventDefault();
   };
+
   return (
     <div className="dark:bg-gray-800 bg-[#fef2e8] p-4 md:p-6 rounded-lg shadow-md">
-      <form onSubmit={handleMobileNumber} className="space-y-6">
+      <div onSubmit={handleMobileNumber} className="space-y-6">
         <div className="md:flex justify-between items-center">
           <h3 className="md:text-4xl text-2xl dark:text-white text-slate-700 font-medium">
             Mobile Number
@@ -54,7 +57,7 @@ function NumberSection() {
             )}
           </div>
         )}
-      </form>
+      </div>
     </div>
   );
 }

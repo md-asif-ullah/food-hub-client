@@ -18,6 +18,7 @@ import { Button } from "@/components/ui/button";
 import { useUpdateUserInfoMutation } from "@/redux/services/User";
 import { useToast } from "@/components/ui/use-toast";
 import { setUser } from "@/redux/user/UserSlice";
+import ProssingAnimation from "@/components/ProssingAnimation";
 
 interface IFormInfoInput {
   name: string;
@@ -25,7 +26,7 @@ interface IFormInfoInput {
 }
 
 function InformationSection() {
-  const [updateUserInfo, { data, isLoading }] = useUpdateUserInfoMutation();
+  const [updateUserInfo, { isLoading }] = useUpdateUserInfoMutation();
 
   const { toast } = useToast();
   const dispatch = useDispatch();
@@ -48,6 +49,7 @@ function InformationSection() {
       dispatch(setUser(res.payload));
 
       if (res.success) {
+        setShowInfo(true);
         toast({
           description: "Your information has been updated.",
         });
@@ -62,8 +64,6 @@ function InformationSection() {
       }
     }
   };
-
-  console.log(data, isLoading);
 
   return (
     <form
@@ -112,7 +112,11 @@ function InformationSection() {
                 {date ? (
                   format(date, "PPP")
                 ) : (
-                  <span>{birthday ? birthday : "Pick a date"}</span>
+                  <span>
+                    {birthday === "undefined/undefined/undefined"
+                      ? "Pick a date"
+                      : birthday}
+                  </span>
                 )}
               </Button>
             </PopoverTrigger>
@@ -147,7 +151,7 @@ function InformationSection() {
         </div>
       </div>
       <Button disabled={showInfo} className="bg-[#f58220] hover:bg-orange-700">
-        Save Changes
+        {isLoading ? <ProssingAnimation /> : "Save Changes"}
       </Button>
     </form>
   );

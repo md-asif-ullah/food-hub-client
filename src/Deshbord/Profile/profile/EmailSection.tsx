@@ -12,13 +12,15 @@ function EmailSection() {
   const user = useSelector((state: RootState) => state.user.currentUser);
   const { email } = user || {};
 
-  const handleEmail: React.FormEventHandler<HTMLFormElement> = (e) => {
+  // TODO: Implement handleUpdateEmail
+
+  const handleUpdateEmail: React.FormEventHandler<HTMLDivElement> = (e) => {
     e.preventDefault();
   };
 
   return (
     <div className="dark:bg-gray-800 bg-[#fef2e8] p-4 md:p-6 rounded-lg shadow-md">
-      <form onSubmit={handleEmail} className="space-y-6">
+      <div onSubmit={handleUpdateEmail} className="space-y-6">
         <div className="md:flex justify-between items-center">
           <h3 className="md:text-4xl text-2xl dark:text-white text-slate-700 font-medium">
             Email Address
@@ -54,7 +56,7 @@ function EmailSection() {
             )}
           </div>
         )}
-      </form>
+      </div>
     </div>
   );
 }
