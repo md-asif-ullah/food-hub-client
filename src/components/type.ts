@@ -83,3 +83,12 @@ export interface reviews {
   message: string;
   payload: review[];
 }
+
+export interface createProduct {
+  name: string;
+  price: string;
+  description: string;
+  category: string;
+  discount: string;
+  quantity: string;
+}

@@ -34,8 +34,7 @@ function UserAccount({ style }: { style?: string }) {
   const dispatch = useDispatch();
   const { toast } = useToast();
 
-  const [logOut, { isLoading, isError }] = useLogOutMutation();
-  console.log(isLoading, isError);
+  const [logOut] = useLogOutMutation();
 
   const handleLogOut = async () => {
     try {

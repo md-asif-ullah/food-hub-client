@@ -1,3 +1,4 @@
+import AddItem from "@/Deshbord/AddItem/AddItem";
 import Profile from "@/Deshbord/Profile/Profile";
 import Deshboard from "@/Layouts/Deshboard";
 import Main from "@/Layouts/Main";
@@ -69,6 +70,10 @@ const router = createBrowserRouter([
       {
         path: "/deshbord/profile",
         element: <Profile />,
+      },
+      {
+        path: "/deshbord/additem",
+        element: <AddItem />,
       },
     ],
   },
