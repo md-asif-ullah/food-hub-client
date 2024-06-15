@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { MdDeleteOutline } from "react-icons/md";
-import { useDeleteCartItemMutation } from "@/redux/services/CartService";
+import {
+  useDeleteCartItemMutation,
+  useUpdateQuantityMutation,
+} from "@/redux/services/CartService";
 import { useToast } from "@/components/ui/use-toast";
 
 interface props {
@@ -10,31 +13,34 @@ interface props {
     name: string;
     price: number;
     size: string;
+    quantity: number;
   };
   quantityTotalPrice: (price: number) => void;
 }
 
 function TableBody({ item, quantityTotalPrice }: props) {
-  const { _id, image, name, price, size } = item;
+  const { _id, image, name, price, size, quantity } = item;
+
+  const [UpdateQuantity] = useUpdateQuantityMutation();
 
   const [deleteCartItem] = useDeleteCartItemMutation();
 
   const { toast } = useToast();
 
-  const [quantity, setQuantity] = useState<number>(1);
   const [total, setTotal] = useState<number>(price);
 
   const handleHighQuantity = () => {
     quantityTotalPrice(+price);
-    setQuantity((prevQuantity) => prevQuantity + 1);
+
     setTotal((prevTotal) => prevTotal + price);
+    UpdateQuantity({ _id, quantity: quantity + 1 });
   };
 
   const handleLowQuantity = () => {
     if (quantity > 1) {
       quantityTotalPrice(-price);
-      setQuantity((prevQuantity) => prevQuantity - 1);
       setTotal((prevTotal) => prevTotal - price);
+      UpdateQuantity({ _id, quantity: quantity - 1 });
     }
   };
 

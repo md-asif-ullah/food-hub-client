@@ -10,6 +10,7 @@ import ContectUs from "@/pages/contact/Contact";
 import Dishes from "@/pages/dishes/Dishes";
 import ErrorPage from "@/pages/error/ErrorPage";
 import Login from "@/pages/login/login";
+import PaymentInfo from "@/pages/paymentInfo/PaymentInfo";
 import Product from "@/pages/productDetails/Product";
 import Register from "@/pages/register/Register";
 import Verify from "@/pages/verify/Verify";
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: "/about",
         element: <About />,
+      },
+      {
+        path: "/payment-info",
+        element: <PaymentInfo />,
       },
     ],
   },

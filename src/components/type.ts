@@ -61,6 +61,7 @@ export interface IProduct {
   price: number;
   image: string;
   size: string;
+  quantity: number;
 }
 
 export interface ICartProduct {
@@ -68,6 +69,13 @@ export interface ICartProduct {
   success: boolean;
   message: string;
   payload?: IProduct[];
+}
+
+export interface IAddToCartType {
+  name: string;
+  price: number;
+  image: string;
+  size: string;
 }
 
 type review = {
@@ -91,4 +99,9 @@ export interface createProduct {
   category: string;
   discount: string;
   quantity: string;
+}
+
+export interface IUpdatequantity {
+  _id: string;
+  quantity: number;
 }
