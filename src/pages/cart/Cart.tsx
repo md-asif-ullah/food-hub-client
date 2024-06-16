@@ -4,10 +4,14 @@ import { Link } from "react-router-dom";
 import SubCard from "./subCard";
 import TableBody from "./TableBody";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/Store";
 
 function Cart() {
-  const { data, isLoading, isError } = useGetCartItemQuery();
+  const user = useSelector((state: RootState) => state.user.currentUser);
+  const { data, isLoading, isError } = useGetCartItemQuery(user?._id);
   const [quantityPrice, setQuantityPrice] = useState(null);
+  console.log(data?.payload);
 
   const quantityTotalPrice = (price: any) => {
     setQuantityPrice((prev) => prev + price);

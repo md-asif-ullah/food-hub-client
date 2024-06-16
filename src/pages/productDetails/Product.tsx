@@ -13,12 +13,15 @@ import { useToast } from "@/components/ui/use-toast";
 import ProssingAnimation from "@/components/ProssingAnimation";
 import { useAddToCartMutation } from "@/redux/services/CartService";
 import { IProduct } from "@/components/type";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/Store";
 
 function Product() {
   const { id } = useParams<{ id: string }>();
   const { data, error, isLoading } = useGetProductQuery(id!);
   const { data: popularProduct } = useGetPopularProductsQuery();
   const [addToCart, { isLoading: addingProduct }] = useAddToCartMutation();
+  const user = useSelector((state: RootState) => state.user.currentUser);
 
   const [buttonStyle, setButtonStyle] = useState<string>("");
   const [size, setSize] = useState<string>("");
@@ -26,10 +29,12 @@ function Product() {
   const product = data?.payload || {};
   const { name, price, image, description, rating } = product;
 
+  console.log(product);
   const { toast } = useToast();
 
   const handleSumit = async (product: IProduct) => {
     const newProduct = {
+      userId: user?._id,
       name: product.name,
       price: product.price,
       image: product.image,

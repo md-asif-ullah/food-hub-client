@@ -72,6 +72,7 @@ export interface ICartProduct {
 }
 
 export interface IAddToCartType {
+  userId: string | undefined;
   name: string;
   price: number;
   image: string;

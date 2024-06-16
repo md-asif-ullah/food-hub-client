@@ -9,7 +9,6 @@ import LoadingAnimation from "@/components/LoadingAnimation";
 
 function Testimonials() {
   const { data, isLoading, isError } = useGetReviewsQuery();
-  console.log(data?.payload);
 
   return (
     <div className="bg-white dark:bg-[#020617] px-5 h-full pb-10 pt-20 lg:grid lg:grid-cols-2 lg:px-10 xl:px-20 ">

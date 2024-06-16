@@ -19,8 +19,8 @@ export const cartApi = createApi({
       }),
       invalidatesTags: ["cart"],
     }),
-    getCartItem: builder.query<ICartProduct, void>({
-      query: () => "/cartProducts",
+    getCartItem: builder.query<ICartProduct, string | undefined>({
+      query: (id) => `/cartProducts/${id}`,
       providesTags: ["cart"],
     }),
     deleteCartItem: builder.mutation<IResponse, string>({
