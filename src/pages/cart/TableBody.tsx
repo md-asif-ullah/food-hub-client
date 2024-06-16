@@ -5,20 +5,13 @@ import {
   useUpdateQuantityMutation,
 } from "@/redux/services/CartService";
 import { useToast } from "@/components/ui/use-toast";
+import { IProduct } from "@/components/type";
 
 interface props {
-  item: {
-    _id: string;
-    image: string;
-    name: string;
-    price: number;
-    size: string;
-    quantity: number;
-  };
-  quantityTotalPrice: (price: number) => void;
+  item: IProduct;
 }
 
-function TableBody({ item, quantityTotalPrice }: props) {
+function TableBody({ item }: props) {
   const { _id, image, name, price, size, quantity } = item;
 
   const [UpdateQuantity] = useUpdateQuantityMutation();
@@ -30,15 +23,12 @@ function TableBody({ item, quantityTotalPrice }: props) {
   const [total, setTotal] = useState<number>(price);
 
   const handleHighQuantity = () => {
-    quantityTotalPrice(+price);
-
     setTotal((prevTotal) => prevTotal + price);
     UpdateQuantity({ _id, quantity: quantity + 1 });
   };
 
   const handleLowQuantity = () => {
     if (quantity > 1) {
-      quantityTotalPrice(-price);
       setTotal((prevTotal) => prevTotal - price);
       UpdateQuantity({ _id, quantity: quantity - 1 });
     }

@@ -3,19 +3,13 @@ import { useGetCartItemQuery } from "@/redux/services/CartService";
 import { Link } from "react-router-dom";
 import SubCard from "./subCard";
 import TableBody from "./TableBody";
-import { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/Store";
 
 function Cart() {
   const user = useSelector((state: RootState) => state.user.currentUser);
   const { data, isLoading, isError } = useGetCartItemQuery(user?._id);
-  const [quantityPrice, setQuantityPrice] = useState(null);
-  console.log(data?.payload);
 
-  const quantityTotalPrice = (price: any) => {
-    setQuantityPrice((prev) => prev + price);
-  };
   return (
     <div className="bg-[#040717] pt-20 overflow-auto">
       {isError && (
@@ -40,15 +34,11 @@ function Cart() {
                 </tr>
               </thead>
               {data?.payload?.map((item) => (
-                <TableBody
-                  key={item._id}
-                  item={item}
-                  quantityTotalPrice={quantityTotalPrice}
-                />
+                <TableBody key={item._id} item={item} />
               ))}
             </table>
           </div>
-          {/* Close the div here */}
+
           <div className="border border-[#1e293b] p-5 rounded-b-xl">
             <Link to="/dishes">
               <button className="text-[#f58220] border border-[#f58220] px-[20px] py-2 rounded-xl hover:text-white hover:bg-[#f58220] duration-700">
@@ -57,7 +47,7 @@ function Cart() {
             </Link>
           </div>
         </div>
-        <SubCard data={data?.payload} quantityPrice={quantityPrice} />
+        <SubCard data={data?.payload} />
       </div>
     </div>
   );

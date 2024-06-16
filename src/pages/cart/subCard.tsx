@@ -1,9 +1,16 @@
-function SubCard({ data, quantityPrice }: any) {
-  let subTotal = 0 + quantityPrice;
+import { IProduct } from "@/components/type";
+
+interface props {
+  data: IProduct[] | undefined;
+}
+
+function SubCard({ data }: props) {
+  console.log(data);
+  let subTotal = 0;
 
   if (data) {
     for (const item of data) {
-      subTotal += item.price;
+      subTotal += item.price * item.quantity;
     }
   }
   const tax = (subTotal * 0.4) / 50;
