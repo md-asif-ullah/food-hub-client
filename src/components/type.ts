@@ -25,6 +25,7 @@ export interface User {
   gender: string | undefined;
   birthday: string | undefined;
   phone: string | undefined;
+  address: string | undefined;
   isAdmin: boolean;
   isBanned: boolean;
   isVerified: boolean;

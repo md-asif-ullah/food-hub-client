@@ -1,11 +1,11 @@
 import { IProduct } from "@/components/type";
+import { Link } from "react-router-dom";
 
 interface props {
   data: IProduct[] | undefined;
 }
 
 function SubCard({ data }: props) {
-  console.log(data);
   let subTotal = 0;
 
   if (data) {
@@ -38,9 +38,11 @@ function SubCard({ data }: props) {
           <p>${total.toFixed(3)}</p>
         </div>
       </div>
-      <button className="bg-[#f58220] mt-7 text-white  w-full py-4 px-5 rounded-xl hover:bg-orange-700 duration-700">
-        proceed to Checkout
-      </button>
+      <Link to="/payment-info">
+        <button className="bg-[#f58220] mt-7 text-white  w-full py-4 px-5 rounded-xl hover:bg-orange-700 duration-700">
+          proceed to Checkout
+        </button>
+      </Link>
     </div>
   );
 }
