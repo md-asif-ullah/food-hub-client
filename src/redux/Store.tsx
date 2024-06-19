@@ -16,6 +16,7 @@ import storage from "redux-persist/lib/storage";
 import { productApi } from "./services/ProductService";
 import { cartApi } from "./services/CartService";
 import { reviewsApi } from "./services/ReviwesService";
+import favouriteApi from "./services/FavouriteService";
 
 const rootReducer = combineReducers({
   [contectApi.reducerPath]: contectApi.reducer,
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   [productApi.reducerPath]: productApi.reducer,
   [cartApi.reducerPath]: cartApi.reducer,
   [reviewsApi.reducerPath]: reviewsApi.reducer,
+  [favouriteApi.reducerPath]: favouriteApi.reducer,
 
   user: userReducer,
 });
@@ -47,7 +49,8 @@ export const store = configureStore({
       userApi.middleware,
       productApi.middleware,
       cartApi.middleware,
-      reviewsApi.middleware
+      reviewsApi.middleware,
+      favouriteApi.middleware
     ),
 });
 export type RootState = ReturnType<typeof store.getState>;

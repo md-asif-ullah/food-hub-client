@@ -107,3 +107,8 @@ export interface IUpdatequantity {
   _id: string;
   quantity: number;
 }
+
+export interface Favourite {
+  userId: string | undefined;
+  productId: string;
+}

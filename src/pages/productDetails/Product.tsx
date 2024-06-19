@@ -15,24 +15,43 @@ import { useAddToCartMutation } from "@/redux/services/CartService";
 import { IProduct } from "@/components/type";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/Store";
+import {
+  useAddFavouriteProductMutation,
+  useGetFavouriteProductsQuery,
+} from "@/redux/services/FavouriteService";
 
 function Product() {
   const { id } = useParams<{ id: string }>();
+
+  //get product by id
   const { data, error, isLoading } = useGetProductQuery(id!);
+
+  //get popular products
   const { data: popularProduct } = useGetPopularProductsQuery();
+
+  //add product to cart
   const [addToCart, { isLoading: addingProduct }] = useAddToCartMutation();
+
+  //get user
   const user = useSelector((state: RootState) => state.user.currentUser);
+
+  //add favourite product
+  const [addFavouriteProduct] = useAddFavouriteProductMutation();
+
+  //get favourite products
+  const { data: favouriteProduct } = useGetFavouriteProductsQuery(
+    user?._id || ""
+  );
 
   const [buttonStyle, setButtonStyle] = useState<string>("");
   const [size, setSize] = useState<string>("");
 
   const product = data?.payload || {};
-  const { name, price, image, description, rating } = product;
+  const { name, price, image, description, rating, _id } = product;
 
-  console.log(product);
   const { toast } = useToast();
 
-  const handleSumit = async (product: IProduct) => {
+  const handleSubmit = async (product: IProduct) => {
     const newProduct = {
       userId: user?._id,
       name: product.name,
@@ -40,13 +59,44 @@ function Product() {
       image: product.image,
       size: size,
     };
-    console.log(newProduct);
+
     try {
       const res = await addToCart(newProduct).unwrap();
       if (res.success) {
         toast({
           title: "Success",
           description: res.message,
+        });
+      }
+    } catch (error: any) {
+      if (error.data) {
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: error.data.message,
+        });
+      }
+    }
+  };
+
+  const findProduct = favouriteProduct?.payload?.find(
+    (favourite: any) => favourite.product_id === _id
+  );
+
+  const handleFavouriteProduct = async () => {
+    const newFavouriteProduct = {
+      userId: user?._id,
+      product_id: _id,
+      name: name,
+      price: price,
+      image: image,
+    };
+    try {
+      const res = await addFavouriteProduct(newFavouriteProduct).unwrap();
+      if (res.success) {
+        toast({
+          title: "Success",
+          description: "Product added to favourite",
         });
       }
     } catch (error: any) {
@@ -119,8 +169,8 @@ function Product() {
           </div>
           <div className="flex items-center mt-10 space-x-2">
             <button
-              onClick={() => handleSumit(product)}
-              disabled={addingProduct}
+              onClick={() => handleSubmit(product)}
+              disabled={Boolean(findProduct)}
               className="secondary_button inline-flex bg-[#f58220] hover:bg-orange-700 px-4 space-x-2"
             >
               {addingProduct ? (
@@ -133,7 +183,13 @@ function Product() {
               )}
             </button>
 
-            <MdOutlineFavorite className="hover_effcet text-3xl bg-black hover:text-red-600" />
+            <button disabled={findProduct} onClick={handleFavouriteProduct}>
+              <MdOutlineFavorite
+                className={`hover_effcet text-3xl bg-black hover:text-red-600 ${
+                  findProduct ? "text-red-600" : ""
+                }`}
+              />
+            </button>
           </div>
         </div>
       </div>

@@ -9,6 +9,7 @@ import Cart from "@/pages/cart/Cart";
 import ContectUs from "@/pages/contact/Contact";
 import Dishes from "@/pages/dishes/Dishes";
 import ErrorPage from "@/pages/error/ErrorPage";
+import Favourite from "@/pages/favourite/Favourite";
 import Login from "@/pages/login/login";
 import PaymentInfo from "@/pages/paymentInfo/PaymentInfo";
 import Product from "@/pages/productDetails/Product";
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
       {
         path: "/payment-info",
         element: <PaymentInfo />,
+      },
+      {
+        path: "/favourite",
+        element: <Favourite />,
       },
     ],
   },
