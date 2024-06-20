@@ -1,5 +1,5 @@
 import { CgProfile } from "react-icons/cg";
-import { LogOut, User } from "lucide-react";
+import { LogOut } from "lucide-react";
 
 import {
   DropdownMenu,
@@ -12,9 +12,12 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Link } from "react-router-dom";
 import { useLogOutMutation } from "@/redux/services/User";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { clearUser } from "@/redux/user/UserSlice";
 import { useToast } from "./ui/use-toast";
+import { FaCarSide, FaUtensils } from "react-icons/fa6";
+import { IoIosPeople } from "react-icons/io";
+import { RootState } from "@/redux/Store";
 
 interface Pagetype {
   label: string;
@@ -22,19 +25,50 @@ interface Pagetype {
   icon: JSX.Element;
 }
 
-const DeshbordPage: Pagetype[] = [
-  {
-    label: "Profile",
-    to: "/deshbord/profile",
-    icon: <CgProfile />,
-  },
-];
-
 function UserAccount({ style }: { style?: string }) {
   const dispatch = useDispatch();
   const { toast } = useToast();
 
+  const user = useSelector((state: RootState) => state.user.currentUser);
   const [logOut] = useLogOutMutation();
+
+  const isAdmin = user?.isAdmin;
+
+  const deshboardSegments: Pagetype[] = isAdmin
+    ? [
+        {
+          label: "Profile",
+          to: "/deshbord/profile",
+          icon: <CgProfile />,
+        },
+        {
+          label: "Orders",
+          to: "/deshbord/Orders",
+          icon: <FaCarSide />,
+        },
+        {
+          label: "Customers",
+          to: "/deshbord/customers",
+          icon: <IoIosPeople />,
+        },
+        {
+          label: "Add Item",
+          to: "/deshbord/additem",
+          icon: <FaUtensils />,
+        },
+      ]
+    : [
+        {
+          label: "Profile",
+          to: "/deshbord/profile",
+          icon: <CgProfile />,
+        },
+        {
+          label: "My Orders",
+          to: "/deshbord/myOrders",
+          icon: <FaCarSide />,
+        },
+      ];
 
   const handleLogOut = async () => {
     try {
@@ -69,10 +103,10 @@ function UserAccount({ style }: { style?: string }) {
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          {DeshbordPage.map((page, index) => (
+          {deshboardSegments.map((page, index) => (
             <Link to={page.to} key={index}>
               <DropdownMenuItem>
-                <User className="mr-2 h-4 w-4" />
+                <i className="mr-2 h-4 w-4">{page.icon}</i>
                 <span>{page.label}</span>
               </DropdownMenuItem>
             </Link>
