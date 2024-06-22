@@ -1,5 +1,7 @@
 import AddItem from "@/Deshbord/AddItem/AddItem";
 import Profile from "@/Deshbord/Profile/Profile";
+import Customers from "@/Deshbord/customers/Customers";
+import EditCustomer from "@/Deshbord/customers/EditCustomer";
 import Deshboard from "@/Layouts/Deshboard";
 import Main from "@/Layouts/Main";
 import VerifyOtp from "@/components/VarifyOtp";
@@ -84,6 +86,14 @@ const router = createBrowserRouter([
       {
         path: "/deshbord/additem",
         element: <AddItem />,
+      },
+      {
+        path: "/deshbord/customers",
+        element: <Customers />,
+      },
+      {
+        path: "/deshbord/customer/:id",
+        element: <EditCustomer />,
       },
     ],
   },

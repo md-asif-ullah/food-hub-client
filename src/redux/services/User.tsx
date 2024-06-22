@@ -2,9 +2,13 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { ILogin, IResponse, IVerify, UserData } from "@/components/type";
 
 type Post = {
-  gender: string;
-  birthday: string;
+  gender?: string;
+  birthday?: string;
   name: string;
+  email?: string;
+  phone?: string;
+  role?: string;
+  status?: string;
 };
 
 interface PartialType {
@@ -51,6 +55,7 @@ export const userApi = createApi({
         method: "PUT",
         body,
       }),
+      invalidatesTags: ["Post"],
     }),
 
     logOut: build.mutation<IResponse, void>({
@@ -58,6 +63,23 @@ export const userApi = createApi({
         url: "/auth/logout",
         method: "POST",
       }),
+      invalidatesTags: ["Post"],
+    }),
+
+    getUsers: build.query<IResponse, any>({
+      query: ({ page, limit }) => {
+        console.log("query", typeof page, typeof limit);
+        return {
+          url: `/users?page=${page}&limit=${limit}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["Post"],
+    }),
+
+    getUser: build.query<IResponse, string | undefined>({
+      query: (id) => `/users/${id}`,
+      providesTags: ["Post"],
     }),
   }),
 });
@@ -68,4 +90,6 @@ export const {
   useLoginUserMutation,
   useUpdateUserInfoMutation,
   useLogOutMutation,
+  useGetUsersQuery,
+  useGetUserQuery,
 } = userApi;
