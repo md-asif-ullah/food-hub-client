@@ -2,9 +2,16 @@ import LoadingAnimation from "@/components/LoadingAnimation";
 import { useGetCartItemQuery } from "@/redux/services/CartService";
 import { Link } from "react-router-dom";
 import SubCard from "./subCard";
-import TableBody from "./TableBody";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/Store";
+import {
+  Table,
+  TableBody,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import CartTableBody from "./CartTableBody";
 
 function Cart() {
   const user = useSelector((state: RootState) => state.user.currentUser);
@@ -23,21 +30,21 @@ function Cart() {
           <div className="border border-[#1e293b] text-2xl rounded-t-xl">
             <h2 className="text-start p-5">Shopping Cart</h2>
           </div>
-          <div className="overflow-x-auto">
-            <table className="md:w-full w-[550px]">
-              <thead className="border border-[#1e293b] bg-[#090d1f]">
-                <tr className="text-[#64748b]">
-                  <th className="text-start p-3">PRODUCTS</th>
-                  <th className="text-start p-3">SIZE</th>
-                  <th className="text-start p-3">Quantity</th>
-                  <th className="text-start p-3">TOTAL</th>
-                </tr>
-              </thead>
+          <Table className="border border-[#e2e8f0] dark:border-[#1e293b]">
+            <TableHeader>
+              <TableRow className="dark:bg-[#0f172a] bg-[#f1f5f9]">
+                <TableHead>PRODUCTS</TableHead>
+                <TableHead>SIZE</TableHead>
+                <TableHead>Quantity</TableHead>
+                <TableHead>TOTAL</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
               {data?.payload?.map((item) => (
-                <TableBody key={item._id} item={item} />
+                <CartTableBody key={item._id} item={item} />
               ))}
-            </table>
-          </div>
+            </TableBody>
+          </Table>
 
           <div className="border border-[#1e293b] p-5 rounded-b-xl">
             <Link to="/dishes">
