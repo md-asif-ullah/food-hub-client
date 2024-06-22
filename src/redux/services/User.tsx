@@ -67,13 +67,8 @@ export const userApi = createApi({
     }),
 
     getUsers: build.query<IResponse, any>({
-      query: ({ page, limit }) => {
-        console.log("query", typeof page, typeof limit);
-        return {
-          url: `/users?page=${page}&limit=${limit}`,
-          method: "GET",
-        };
-      },
+      query: ({ page, limit, search }) =>
+        `/users?search=${search}&page=${page}&limit=${limit}`,
       providesTags: ["Post"],
     }),
 
