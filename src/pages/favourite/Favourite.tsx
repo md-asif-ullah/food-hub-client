@@ -5,6 +5,7 @@ import {
   useDeleteFavouriteProductMutation,
   useGetFavouriteProductsQuery,
 } from "@/redux/services/FavouriteService";
+import { Helmet } from "react-helmet-async";
 import { MdOutlineFavorite } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -39,6 +40,9 @@ function Favourite() {
 
   return (
     <div className="min-h-screen dark:bg-[#020617] bg-white pt-28 xl:px-14 px-5">
+      <Helmet>
+        <title>favourite | Best Online restaurant</title>
+      </Helmet>
       {favouriteProduct?.payload?.length === 0 && (
         <div className="text-center text-2xl font-bold dark:text-white text-black">
           Not found any favourite product

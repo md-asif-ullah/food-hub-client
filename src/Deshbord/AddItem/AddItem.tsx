@@ -15,6 +15,7 @@ import {
 import { useCreateProductMutation } from "@/redux/services/ProductService";
 import { useToast } from "@/components/ui/use-toast";
 import ProssingAnimation from "@/components/ProssingAnimation";
+import { Helmet } from "react-helmet-async";
 
 interface FormType {
   name: string;
@@ -88,6 +89,9 @@ function AddItem() {
 
   return (
     <div className="text-white min-h-[80vh] pb-20">
+      <Helmet>
+        <title> Add Dish | Best Online restaurant</title>
+      </Helmet>
       <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl ml-4 sm:ml-6 md:ml-10">
         Add Dish
       </h1>

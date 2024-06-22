@@ -12,6 +12,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import CartTableBody from "./CartTableBody";
+import { Helmet } from "react-helmet-async";
 
 function Cart() {
   const user = useSelector((state: RootState) => state.user.currentUser);
@@ -19,6 +20,9 @@ function Cart() {
 
   return (
     <div className="bg-[#040717] pt-20 overflow-auto">
+      <Helmet>
+        <title>Cart | Best Online restaurant</title>
+      </Helmet>
       {isError && (
         <p className="text-red-700 text-center">
           Error: {"something went wrong"}

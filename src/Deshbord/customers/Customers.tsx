@@ -19,6 +19,7 @@ import { IoIosSearch } from "react-icons/io";
 import CustomerInfoTableBody from "./CustomerInfoTableBody";
 import { User } from "@/components/type";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 function Customers() {
   const [page, setPage] = useState<number>(1);
@@ -54,9 +55,12 @@ function Customers() {
 
   return (
     <div className=" pb-20 min-h-screen">
+      <Helmet>
+        <title>Customers | Best Online restaurant</title>
+      </Helmet>
       <div className="lg:px-10 px-5">
         <div className="border border-[#e2e8f0] dark:border-[#1e293b] text-2xl rounded-t-xl">
-          <h2 className="text-start p-5">Shopping Cart</h2>
+          <h2 className="text-start p-5">Customers List</h2>
         </div>
         {isLoading && <LoadingAnimation />}
         {isError && (

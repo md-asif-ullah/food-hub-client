@@ -4,6 +4,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useAddContectInfoMutation } from "@/redux/services/ContactService";
 import ProssingAnimation from "@/components/ProssingAnimation";
 import { useToast } from "@/components/ui/use-toast";
+import { Helmet } from "react-helmet-async";
 
 type FormInput = {
   name: string;
@@ -45,6 +46,9 @@ function ContectUs() {
 
   return (
     <div className="bg-[#ffffff] dark:bg-[#040717] h-full">
+      <Helmet>
+        <title>Contact | Best Online restaurant</title>
+      </Helmet>
       <div className="h-full flex lg:justify-between bg-[#ffffff] dark:bg-[#040717] pb-24">
         <div className="pt-10 mb-5 md:mb-0 lg:ml-20 md:mx-auto mx-5">
           <div className="text-center mx-auto ">
