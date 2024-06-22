@@ -1,6 +1,6 @@
 import aboutThum from "@/assets/images/aboutImg/about-thumb-5129ac84.png";
-import CustomersImg from "@/assets/images/aboutImg/CustomersImg.png";
-import BranchImg from "@/assets/images/aboutImg/BranchImg.png";
+import { FaCodeBranch } from "react-icons/fa6";
+import { IoIosPeople } from "react-icons/io";
 
 function AboutHeroSection() {
   return (
@@ -25,14 +25,18 @@ function AboutHeroSection() {
         </div>
         <div className="sm:flex justify-between">
           <div className="mt-10 ">
-            <div className="text-center sm:text-start">
-              <img className="mx-auto sm:mx-0" src={CustomersImg} alt="" />
+            <div>
+              <div className="bg-[#f58220] w-16 border border-white py-1.5 rounded-full flex items-center justify-center ">
+                <IoIosPeople className="text-5xl text-white " />
+              </div>
               <h1 className="text-2xl font-semibold mt-5">90k+ Customers</h1>
               <p className="text-xl">Believe in our service & Care</p>
             </div>
           </div>
-          <div className="text-center sm:text-start mt-10">
-            <img className="mx-auto sm:mx-0" src={BranchImg} alt="" />
+          <div className=" mt-10">
+            <div className="bg-[#f58220] w-16 border border-white py-[15px] rounded-full flex items-center justify-center">
+              <FaCodeBranch className="text-3xl text-white " />
+            </div>
             <h1 className="text-2xl font-semibold mt-5">100+ Branch</h1>
             <p className="text-xl">Food ready for occupancy</p>
           </div>

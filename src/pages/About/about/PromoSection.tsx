@@ -2,7 +2,7 @@ function PromoSection() {
   return (
     <div className="lg:grid lg:grid-cols-2 mt-28 gap-5">
       <div className="mt-10 lg:mt-0 space-y-5">
-        <button className="bg-[#352018] text-[#ca4d19] py-1 px-3 rounded-2xl">
+        <button className="dark:bg-[#352018] bg-[#fce8dd] text-[#ca4d19] py-1 px-3 rounded-2xl">
           promo video
         </button>
         <h1 className="text-2xl md:text-5xl font-semibold ">
