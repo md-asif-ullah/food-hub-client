@@ -17,6 +17,7 @@ import { productApi } from "./services/ProductService";
 import { cartApi } from "./services/CartService";
 import { reviewsApi } from "./services/ReviwesService";
 import favouriteApi from "./services/FavouriteService";
+import { orderApi } from "./services/OrderService";
 
 const rootReducer = combineReducers({
   [contectApi.reducerPath]: contectApi.reducer,
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   [cartApi.reducerPath]: cartApi.reducer,
   [reviewsApi.reducerPath]: reviewsApi.reducer,
   [favouriteApi.reducerPath]: favouriteApi.reducer,
+  [orderApi.reducerPath]: orderApi.reducer,
 
   user: userReducer,
 });
@@ -50,7 +52,8 @@ export const store = configureStore({
       productApi.middleware,
       cartApi.middleware,
       reviewsApi.middleware,
-      favouriteApi.middleware
+      favouriteApi.middleware,
+      orderApi.middleware
     ),
 });
 export type RootState = ReturnType<typeof store.getState>;

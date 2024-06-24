@@ -3,12 +3,15 @@ import { useGetCartItemQuery } from "@/redux/services/CartService";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import ProductSummary from "./ProductSummary";
+import ProssingAnimation from "@/components/ProssingAnimation";
+import { Button } from "@/components/ui/button";
 
 interface Iprops {
   setTotalPayAmount: (value: number) => void;
+  isLoading: boolean;
 }
 
-function OrderSummary({ setTotalPayAmount }: Iprops) {
+function OrderSummary({ setTotalPayAmount, isLoading }: Iprops) {
   const user = useSelector((state: RootState) => state.user.currentUser);
   const { data } = useGetCartItemQuery(user?._id);
 
@@ -57,9 +60,9 @@ function OrderSummary({ setTotalPayAmount }: Iprops) {
           <p>${total.toFixed(2)}</p>
         </div>
       </div>
-      <button className="bg-[#f58220] mt-7 text-white w-full py-4 px-5 rounded-xl hover:bg-orange-700 duration-700">
-        Place Order
-      </button>
+      <Button className="w-full mt-4 py-6 text-white bg-[#f58220] hover:bg-orange-700 duration-500">
+        {isLoading ? <ProssingAnimation /> : "Order Now"}
+      </Button>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import { IProduct } from "@/components/type";
+import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
 interface props {
@@ -17,7 +18,7 @@ function SubCard({ data }: props) {
   const total = subTotal + tax;
 
   return (
-    <div className="border border-[#1e293b] w-full p-4 rounded-xl lg:h-[310px]">
+    <div className="border border-[#1e293b] w-full p-4 rounded-xl lg:h-[290px]">
       <h2 className="text-xl font-semibold">Cart Total</h2>
       <div className="space-y-3 mt-5">
         <div className="flex justify-between">
@@ -39,9 +40,9 @@ function SubCard({ data }: props) {
         </div>
       </div>
       <Link to="/payment-info">
-        <button className="bg-[#f58220] mt-7 text-white  w-full py-4 px-5 rounded-xl hover:bg-orange-700 duration-700">
-          proceed to Checkout
-        </button>
+        <Button className="w-full mt-4 py-6 text-white bg-[#f58220] hover:bg-orange-700 duration-500">
+          Proceed to Checkout
+        </Button>
       </Link>
     </div>
   );

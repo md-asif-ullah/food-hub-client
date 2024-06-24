@@ -45,7 +45,7 @@ function ContectUs() {
   };
 
   return (
-    <div className="bg-[#ffffff] dark:bg-[#040717] h-full">
+    <div className="bg-[#ffffff] dark:bg-[#040717] h-full pt-28">
       <Helmet>
         <title>Contact | Best Online restaurant</title>
       </Helmet>

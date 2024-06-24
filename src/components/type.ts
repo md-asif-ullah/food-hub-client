@@ -112,3 +112,13 @@ export interface Favourite {
   userId: string | undefined;
   productId: string;
 }
+
+export interface IOrder {
+  userId: string | undefined;
+  name: string;
+  companyNumber: string | undefined;
+  address: string;
+  number: number;
+  message?: string | undefined;
+  products: IProduct[];
+}

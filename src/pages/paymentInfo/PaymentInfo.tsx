@@ -10,6 +10,8 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/redux/Store";
 import { useState } from "react";
 import { useGetCartItemQuery } from "@/redux/services/CartService";
+import { useAddOrderMutation } from "@/redux/services/OrderService";
+import { useToast } from "@/components/ui/use-toast";
 
 interface FormType {
   name: string;
@@ -21,18 +23,26 @@ interface FormType {
 
 function PaymentInfo() {
   const [totalPayAmount, setTotalPayAmount] = useState<number>(0);
-  const [selectedOption, setSelectedOption] = useState("");
+  const [selectePaymentOption, setSelectePaymentOption] = useState("");
+  const [error, setError] = useState<string>("");
+
+  // get user data
   const user = useSelector((state: RootState) => state.user.currentUser);
   const { data } = useGetCartItemQuery(user?._id);
 
   const { name, phone, address } = user || {};
   const cartProducts = data?.payload || [];
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedOption(event.target.value);
-  };
+  // add order
+  const [addOrder, { isLoading }] = useAddOrderMutation();
 
-  console.log(selectedOption);
+  const { toast } = useToast();
+
+  // handle payment option
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectePaymentOption(event.target.value);
+  };
 
   const {
     register,
@@ -43,17 +53,39 @@ function PaymentInfo() {
 
   const onSubmit = async (data: FormType) => {
     const { name, companyName, address, number, message } = data;
+    console.log(typeof number);
+    if (!selectePaymentOption)
+      return setError("Please select a payment method");
 
+    setError("");
     const newOrderData = {
+      userId: user?._id,
       name,
       companyName,
       address,
       number,
       message,
+      paymentType: selectePaymentOption,
       totalPayAmount,
       cartProducts,
     };
-    console.log(newOrderData);
+    try {
+      const res = await addOrder(newOrderData).unwrap();
+      if (res.success) {
+        toast({
+          title: "Order Placed Successfully",
+          description: res.message,
+        });
+      }
+    } catch (error: any) {
+      if (error.data) {
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: error.data.message,
+        });
+      }
+    }
   };
 
   return (
@@ -137,20 +169,24 @@ function PaymentInfo() {
                   <FiDollarSign className="text-3xl text-[#f58220]" />
                   <span className="w-20 mt-2">Cash on Delivery</span>
                 </Label>
-                <RadioGroupItem value="cash-on-delivery" />
+                <RadioGroupItem
+                  id="cash-on-delivery"
+                  value="cash-on-delivery"
+                />
               </div>
               <div className="flex flex-col items-center space-y-5 cursor-pointer w-20">
                 <Label
-                  htmlFor="option-two"
+                  htmlFor="Paypal"
                   className="text-center cursor-pointer flex flex-col items-center"
                 >
                   <img src={paypalIcon} alt="Paypal" className="h-8 w-8" />
                   <span className="w-20 mt-2">Paypal</span>
                 </Label>
-                <RadioGroupItem value="option-two" id="option-two" />
+                <RadioGroupItem value="Paypal" id="Paypal" />
               </div>
             </RadioGroup>
           </div>
+          {error && <span className="text-red-700">{error}</span>}
           <div className=" mt-10">
             <h1 className="text-xl font-semibold mb-4">
               Additional Information
@@ -173,7 +209,10 @@ function PaymentInfo() {
           </div>
         </div>
         <div className="col-span-3">
-          <OrderSummary setTotalPayAmount={setTotalPayAmount} />
+          <OrderSummary
+            setTotalPayAmount={setTotalPayAmount}
+            isLoading={isLoading}
+          />
         </div>
       </div>
     </form>
