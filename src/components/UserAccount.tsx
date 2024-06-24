@@ -17,7 +17,7 @@ import { clearUser } from "@/redux/user/UserSlice";
 import { useToast } from "./ui/use-toast";
 import { FaCarSide, FaUtensils } from "react-icons/fa6";
 import { IoIosPeople } from "react-icons/io";
-import { RootState } from "@/redux/Store";
+import { RootState, persistor } from "@/redux/Store";
 
 interface Pagetype {
   label: string;
@@ -76,9 +76,11 @@ function UserAccount({ style }: { style?: string }) {
 
       if (res.success) {
         dispatch(clearUser());
-        toast({
-          title: "sign out successfully",
-          description: "You can now login to your account.",
+        persistor.purge().then(() => {
+          toast({
+            title: "Sign out successfully",
+            description: "You can now login to your account.",
+          });
         });
       }
     } catch (error: any) {

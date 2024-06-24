@@ -11,6 +11,7 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
+  persistStore,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { productApi } from "./services/ProductService";
@@ -59,3 +60,5 @@ export const store = configureStore({
 export type RootState = ReturnType<typeof store.getState>;
 
 setupListeners(store.dispatch);
+
+export const persistor = persistStore(store);

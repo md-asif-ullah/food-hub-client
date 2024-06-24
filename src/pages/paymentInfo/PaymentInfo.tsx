@@ -53,7 +53,6 @@ function PaymentInfo() {
 
   const onSubmit = async (data: FormType) => {
     const { name, companyName, address, number, message } = data;
-    console.log(typeof number);
     if (!selectePaymentOption)
       return setError("Please select a payment method");
 

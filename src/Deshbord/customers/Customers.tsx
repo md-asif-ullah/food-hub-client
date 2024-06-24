@@ -26,8 +26,6 @@ function Customers() {
   const [search, setSearch] = useState<string>("");
   const limit = 5;
 
-  console.log(search);
-
   // Fetch all users using rtk query
   const { data, isLoading, isError } = useGetUsersQuery({
     page,

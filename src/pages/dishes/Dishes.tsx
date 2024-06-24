@@ -2,7 +2,6 @@ import FoodCard from "@/components/FoodCard";
 import LoadingAnimation from "@/components/LoadingAnimation";
 import { useGetAllProductsQuery } from "@/redux/services/ProductService";
 import { useEffect, useState } from "react";
-import useDebounce from "../hooks/useDebounce";
 import SmallDeviceFiltering from "./SmallDeviceFiltering";
 import BigDeviceFiltering from "./BigDeviceFiltering";
 import { useLocation } from "react-router-dom";
@@ -21,10 +20,8 @@ const Dishes = () => {
     rating: "",
   });
 
-  // Debounce search query
-  const debounceProduct = useDebounce(searchQuery, 500);
   // Fetch all products using rtk query
-  const { data, isLoading, isError } = useGetAllProductsQuery(debounceProduct);
+  const { data, isLoading, isError } = useGetAllProductsQuery(searchQuery);
 
   const { search } = useLocation();
 
