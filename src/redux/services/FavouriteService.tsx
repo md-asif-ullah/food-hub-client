@@ -1,13 +1,9 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { Favourite, IResponse } from "@/components/type";
+import { baseQueryApi } from "@/pages/hooks/baseQueryWithReauth";
 
-const favouriteApi = createApi({
-  baseQuery: fetchBaseQuery({
-    baseUrl: "/api",
-  }),
-  tagTypes: ["Favourite"],
-  endpoints: (build) => ({
-    addFavouriteProduct: build.mutation<IResponse, Partial<Favourite>>({
+const favouriteApi = baseQueryApi.injectEndpoints({
+  endpoints: (builder) => ({
+    addFavouriteProduct: builder.mutation<IResponse, Partial<Favourite>>({
       query: (body) => ({
         url: "/favourite",
         method: "POST",
@@ -15,11 +11,11 @@ const favouriteApi = createApi({
       }),
       invalidatesTags: ["Favourite"],
     }),
-    getFavouriteProducts: build.query<IResponse, string>({
+    getFavouriteProducts: builder.query<IResponse, string>({
       query: (id) => `/favourite/${id}`,
       providesTags: ["Favourite"],
     }),
-    deleteFavouriteProduct: build.mutation<IResponse, string>({
+    deleteFavouriteProduct: builder.mutation<IResponse, string>({
       query: (id) => ({
         url: `/favourite/${id}`,
         method: "DELETE",

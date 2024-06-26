@@ -1,10 +1,7 @@
 import { IResponse, products } from "@/components/type";
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { baseQueryApi } from "@/pages/hooks/baseQueryWithReauth";
 
-export const productApi = createApi({
-  reducerPath: "productApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "/api" }),
-  tagTypes: ["Products"],
+export const productApi = baseQueryApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllProducts: builder.query<products, string>({
       query: (query) => `/products?${query}`,

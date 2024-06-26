@@ -53,7 +53,7 @@ function EditCustomer() {
       if (res.data) {
         toast({
           title: "Product Added",
-          description: "Product has been added successfully",
+          description: "user updated successfully",
         });
       }
     } catch (error: any) {

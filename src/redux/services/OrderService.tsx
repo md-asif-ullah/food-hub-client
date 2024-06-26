@@ -1,11 +1,8 @@
 import { IOrder, IResponse } from "@/components/type";
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { cartApi } from "./CartService";
+import { baseQueryApi } from "@/pages/hooks/baseQueryWithReauth";
 
-export const orderApi = createApi({
-  reducerPath: "orderApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "/api" }),
-  tagTypes: ["order"],
+export const orderApi = baseQueryApi.injectEndpoints({
   endpoints: (builder) => ({
     addOrder: builder.mutation<IResponse, Partial<IOrder>>({
       query: (product) => ({

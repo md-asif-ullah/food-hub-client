@@ -1,5 +1,5 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { ILogin, IResponse, IVerify, UserData } from "@/components/type";
+import { baseQueryApi } from "@/pages/hooks/baseQueryWithReauth";
 
 type Post = {
   gender?: string;
@@ -16,10 +16,7 @@ interface PartialType {
   body: Post;
 }
 
-export const userApi = createApi({
-  reducerPath: "userApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "/api" }),
-  tagTypes: ["Post"],
+export const userApi = baseQueryApi.injectEndpoints({
   endpoints: (build) => ({
     processRegister: build.mutation<IResponse, Omit<UserData, "id">>({
       query: (body) => ({
@@ -27,7 +24,7 @@ export const userApi = createApi({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["Post"],
+      invalidatesTags: ["User"],
     }),
     verifyUser: build.mutation<IResponse, Omit<IVerify, "id">>({
       query: (body) => ({
@@ -35,7 +32,7 @@ export const userApi = createApi({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["Post"],
+      invalidatesTags: ["User"],
     }),
     loginUser: build.mutation<IResponse, Omit<ILogin, "id">>({
       query: (body) => ({
@@ -43,7 +40,7 @@ export const userApi = createApi({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["Post"],
+      invalidatesTags: ["User"],
     }),
 
     updateUserInfo: build.mutation<
@@ -55,7 +52,7 @@ export const userApi = createApi({
         method: "PUT",
         body,
       }),
-      invalidatesTags: ["Post"],
+      invalidatesTags: ["User"],
     }),
 
     logOut: build.mutation<IResponse, void>({
@@ -63,18 +60,18 @@ export const userApi = createApi({
         url: "/auth/logout",
         method: "POST",
       }),
-      invalidatesTags: ["Post"],
+      invalidatesTags: ["User"],
     }),
 
     getUsers: build.query<IResponse, any>({
       query: ({ page, limit, search }) =>
         `/users?search=${search}&page=${page}&limit=${limit}`,
-      providesTags: ["Post"],
+      providesTags: ["User"],
     }),
 
     getUser: build.query<IResponse, string | undefined>({
       query: (id) => `/users/${id}`,
-      providesTags: ["Post"],
+      providesTags: ["User"],
     }),
   }),
 });
