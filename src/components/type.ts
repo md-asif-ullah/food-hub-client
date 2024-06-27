@@ -114,11 +114,16 @@ export interface Favourite {
 }
 
 export interface IOrder {
+  _id?: string;
   userId: string | undefined;
   name: string;
   companyNumber: string | undefined;
   address: string;
   number: number;
+  paymentType: string;
+  totalPayAmount: number;
+  orderId: number;
+  cartProducts: IProduct[];
+  status: string;
   message?: string | undefined;
-  products: IProduct[];
 }

@@ -37,6 +37,7 @@ function PaymentInfo() {
   const [addOrder, { isLoading }] = useAddOrderMutation();
 
   const { toast } = useToast();
+  const orderId = Math.floor(100000000 * Math.random() * 10);
 
   // handle payment option
 
@@ -59,6 +60,7 @@ function PaymentInfo() {
     setError("");
     const newOrderData = {
       userId: user?._id,
+      orderId,
       name,
       companyName,
       address,
@@ -67,6 +69,7 @@ function PaymentInfo() {
       paymentType: selectePaymentOption,
       totalPayAmount,
       cartProducts,
+      status: "pending",
     };
     try {
       const res = await addOrder(newOrderData).unwrap();

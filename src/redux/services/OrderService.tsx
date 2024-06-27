@@ -16,7 +16,11 @@ export const orderApi = baseQueryApi.injectEndpoints({
         dispatch(cartApi.util.invalidateTags(["cart"]));
       },
     }),
+    getOrderById: builder.query<IResponse, string>({
+      query: (id) => `/order/${id}`,
+      providesTags: ["order"],
+    }),
   }),
 });
 
-export const { useAddOrderMutation } = orderApi;
+export const { useAddOrderMutation, useGetOrderByIdQuery } = orderApi;
