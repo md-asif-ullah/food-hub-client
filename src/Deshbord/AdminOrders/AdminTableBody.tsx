@@ -1,6 +1,8 @@
 import { TableCell, TableRow } from "@/components/ui/table";
 import { Trash } from "lucide-react";
 import UpdateOrderStatus from "./UpdateOrderStatus";
+import { useToast } from "@/components/ui/use-toast";
+import { useDeleteOrderMutation } from "@/redux/services/OrderService";
 
 function AdminTableBody({ order }: any) {
   const {
@@ -17,6 +19,10 @@ function AdminTableBody({ order }: any) {
     status,
   } = order;
 
+  const [deleteOrder] = useDeleteOrderMutation();
+
+  const { toast } = useToast();
+
   const date = new Date(createdAt);
   const formattedDate = date.toLocaleDateString("en-US", {
     day: "numeric",
@@ -24,8 +30,21 @@ function AdminTableBody({ order }: any) {
     year: "numeric",
   });
 
-  const handleDeleteOrder = () => {
-    console.log("delete");
+  const handleDeleteOrder = async () => {
+    try {
+      const res = await deleteOrder(_id).unwrap();
+      if (res.success) {
+        toast({
+          title: "order deleted successfully.",
+        });
+      }
+    } catch (error: any) {
+      toast({
+        variant: "destructive",
+        title: "order update failed.",
+        description: error.message,
+      });
+    }
   };
 
   return (

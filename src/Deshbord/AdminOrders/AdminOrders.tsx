@@ -17,6 +17,9 @@ function AdminOrders() {
     <div className="h-full">
       {isLoading && <LoadingAnimation />}
       {isError && <div>Something went wrong</div>}
+      {data?.payload?.length === 0 && (
+        <div className="text-center text-2xl mt-10">No Orders Found</div>
+      )}
       <div className="px-10">
         <div className="border border-[#e2e8f0] dark:border-[#1e293b] text-2xl rounded-t-xl">
           <h2 className="text-start p-5">Order History</h2>
@@ -26,7 +29,7 @@ function AdminOrders() {
             <TableHeader>
               <TableRow>
                 <TableHead>Date</TableHead>
-                <TableHead>Order ID</TableHead>
+                <TableHead className="whitespace-nowrap">Order ID</TableHead>
                 <TableHead>Dishes</TableHead>
                 <TableHead className="whitespace-nowrap">Total Price</TableHead>
                 <TableHead className="whitespace-nowrap">

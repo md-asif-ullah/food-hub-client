@@ -20,9 +20,9 @@ function UpdateOrderStatus({ status, id }: orderProps) {
 
   const handleStatus = async (status: string) => {
     try {
-      const res = await updateOrderStatus({ id: id, status: status });
+      const res = await updateOrderStatus({ id: id, status: status }).unwrap();
 
-      if (res.data?.success) {
+      if (res.success) {
         toast({
           title: "order updated successfully.",
         });
