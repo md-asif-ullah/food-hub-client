@@ -20,7 +20,27 @@ export const orderApi = baseQueryApi.injectEndpoints({
       query: (id) => `/order/${id}`,
       providesTags: ["order"],
     }),
+    getOrders: builder.query<IResponse, void>({
+      query: () => "/order",
+      providesTags: ["order"],
+    }),
+    updateOrderStatus: builder.mutation<
+      IResponse,
+      { id: string; status: string }
+    >({
+      query: ({ id, status }) => ({
+        url: `/order/update-Status/${id}`,
+        method: "PUT",
+        body: { status },
+      }),
+      invalidatesTags: ["order"],
+    }),
   }),
 });
 
-export const { useAddOrderMutation, useGetOrderByIdQuery } = orderApi;
+export const {
+  useAddOrderMutation,
+  useGetOrderByIdQuery,
+  useGetOrdersQuery,
+  useUpdateOrderStatusMutation,
+} = orderApi;

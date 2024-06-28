@@ -119,7 +119,7 @@ export interface IOrder {
   name: string;
   companyNumber: string | undefined;
   address: string;
-  number: number;
+  phoneNumber: number;
   paymentType: string;
   totalPayAmount: number;
   orderId: number;

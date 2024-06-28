@@ -65,7 +65,7 @@ function UserAccount({ style }: { style?: string }) {
         },
         {
           label: "My Orders",
-          to: "/deshbord/myOrders",
+          to: "/deshbord/userOrders",
           icon: <FaCarSide />,
         },
       ];

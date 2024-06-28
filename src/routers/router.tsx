@@ -1,4 +1,5 @@
 import AddItem from "@/Deshbord/AddItem/AddItem";
+import AdminOrders from "@/Deshbord/AdminOrders/AdminOrders";
 import UserOrder from "@/Deshbord/Orders/UserOrder";
 import Profile from "@/Deshbord/Profile/Profile";
 import Customers from "@/Deshbord/customers/Customers";
@@ -97,8 +98,12 @@ const router = createBrowserRouter([
         element: <EditCustomer />,
       },
       {
-        path: "/deshbord/myOrders",
+        path: "/deshbord/userOrders",
         element: <UserOrder />,
+      },
+      {
+        path: "/deshbord/Orders",
+        element: <AdminOrders />,
       },
     ],
   },

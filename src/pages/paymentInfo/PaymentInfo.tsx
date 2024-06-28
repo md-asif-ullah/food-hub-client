@@ -17,7 +17,7 @@ interface FormType {
   name: string;
   companyName?: string;
   address: string;
-  number: number;
+  phoneNumber: number;
   message: string;
 }
 
@@ -53,7 +53,7 @@ function PaymentInfo() {
   } = useForm<FormType>();
 
   const onSubmit = async (data: FormType) => {
-    const { name, companyName, address, number, message } = data;
+    const { name, companyName, address, phoneNumber, message } = data;
     if (!selectePaymentOption)
       return setError("Please select a payment method");
 
@@ -64,9 +64,9 @@ function PaymentInfo() {
       name,
       companyName,
       address,
-      number,
+      phoneNumber,
       message,
-      paymentType: selectePaymentOption,
+      paymentMethod: selectePaymentOption,
       totalPayAmount,
       cartProducts,
       status: "pending",
@@ -132,9 +132,9 @@ function PaymentInfo() {
                 placeholder="Phone Number"
                 defaultValue={phone}
                 className="focus:border-[#f58220] mt-2 text-black dark:text-white"
-                {...register("number", { required: true })}
+                {...register("phoneNumber", { required: true })}
               />
-              {errors.number && (
+              {errors.phoneNumber && (
                 <span className="text-sm text-red-700">
                   This field is required
                 </span>
