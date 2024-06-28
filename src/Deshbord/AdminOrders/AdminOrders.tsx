@@ -28,13 +28,19 @@ function AdminOrders() {
                 <TableHead>Date</TableHead>
                 <TableHead>Order ID</TableHead>
                 <TableHead>Dishes</TableHead>
-                <TableHead>Total Price</TableHead>
-                <TableHead>Phone Number</TableHead>
-                <TableHead>Payment Method</TableHead>
+                <TableHead className="whitespace-nowrap">Total Price</TableHead>
+                <TableHead className="whitespace-nowrap">
+                  Phone Number
+                </TableHead>
+                <TableHead className="whitespace-nowrap">
+                  Payment Method
+                </TableHead>
                 <TableHead>Address</TableHead>
                 <TableHead>Message</TableHead>
-                <TableHead>Company Name</TableHead>
-                <TableHead>Status</TableHead>
+                <TableHead className="whitespace-nowrap">
+                  Company Name
+                </TableHead>
+                <TableHead className="text-center">Status</TableHead>
                 <TableHead>Delete</TableHead>
               </TableRow>
             </TableHeader>
