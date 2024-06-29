@@ -84,3 +84,19 @@
 .hover_effcet {
   @apply cursor-pointer hover:text-[#f58220] duration-300;
 }
+
+.Lable_style {
+  @apply text-[#17172a] dark:text-white;
+}
+
+.Input_style {
+  @apply focus:border-[#f58220] mt-2 text-black dark:text-white;
+}
+
+.textarea_style {
+  @apply focus:border-[#f58220] mt-2 pb-16 text-black dark:text-white;
+}
+
+.Button_style {
+  @apply text-white mt-5 bg-[#f58220] hover:bg-orange-700 duration-500;
+}

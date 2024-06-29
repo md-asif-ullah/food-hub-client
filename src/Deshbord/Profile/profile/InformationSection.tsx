@@ -83,21 +83,17 @@ function InformationSection() {
       </div>
       <div className="space-y-4">
         <div>
-          <label className="block mb-2 text-sm font-medium text-black dark:text-gray-300">
-            Name
-          </label>
+          <Label className="Lable_style">Name</Label>
           <Input
             type="text"
             {...register("name")}
             disabled={showInfo}
             defaultValue={name}
-            className="w-full px-3 py-2 rounded focus:border-orange-600"
+            className="Input_style"
           />
         </div>
-        <div>
-          <label className="block mb-2 text-sm font-medium text-black dark:text-gray-300">
-            Date of Birth
-          </label>
+        <div className="space-y-2">
+          <Label className="Lable_style">Date of Birth</Label>
           <Popover>
             <PopoverTrigger asChild>
               <Button
@@ -131,13 +127,11 @@ function InformationSection() {
           </Popover>
         </div>
         <div>
-          <label className="block mb-2 text-sm font-medium text-black dark:text-gray-300">
-            Gender
-          </label>
+          <Label className="Lable_style">Gender</Label>
           <RadioGroup
             {...register("gender")}
             defaultValue={gender}
-            className="flex space-x-5"
+            className="flex space-x-5 mt-2"
           >
             <div className="flex items-center space-x-2">
               <RadioGroupItem disabled={showInfo} value="Male" id="r1" />

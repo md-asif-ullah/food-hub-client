@@ -9,6 +9,9 @@ import { useLoginUserMutation } from "@/redux/services/User";
 import ProssingAnimation from "@/components/ProssingAnimation";
 import { setUser } from "@/redux/user/UserSlice";
 import { useDispatch } from "react-redux";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 function Login() {
   const [checkbox, setCheckbox] = useState<boolean>(false);
@@ -60,13 +63,11 @@ function Login() {
 
         <form className="mt-5 w-full" onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-5">
-            <label className="block mb-2 text-sm font-medium dark:text-gray-300 text-black">
-              Email
-            </label>
-            <input
+            <Label className="Lable_style">Email</Label>
+            <Input
               type="email"
               {...register("email", { required: true })}
-              className="bg-white dark:bg-[#040717] border text-black dark:text-white sm:text-sm rounded-lg block w-full p-2.5 outline-none focus:border-[#f58220] placeholder-gray-400"
+              className="Input_style"
               placeholder="Enter your email"
             />
             {errors.email && (
@@ -74,15 +75,13 @@ function Login() {
             )}
           </div>
           <div className="mb-5">
-            <label className="block mb-2 text-sm font-medium dark:text-gray-300 text-black">
-              Password
-            </label>
-            <input
+            <Label className="Lable_style">Password</Label>
+            <Input
               type={checkbox ? "text" : "password"}
               {...register("password", {
                 required: true,
               })}
-              className="bg-white dark:bg-[#040717] border  text-black dark:text-white sm:text-sm rounded-lg block w-full p-2.5 outline-none focus:border-[#f58220] placeholder-gray-400"
+              className="Input_style"
               placeholder="Enter your password"
             />
             {errors.password && (
@@ -101,13 +100,13 @@ function Login() {
             </label>
           </div>
 
-          <button
+          <Button
             type="submit"
             disabled={isLoading}
-            className="text-white mt-5 bg-[#f58220] hover:bg-orange-700 primary_button"
+            className="Button_style w-full"
           >
             {isLoading ? <ProssingAnimation /> : "Login"}
-          </button>
+          </Button>
         </form>
 
         <p className="dark:text-white text-black mt-2 text-sm">

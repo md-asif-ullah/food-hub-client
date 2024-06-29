@@ -7,6 +7,9 @@ import SocialLogin from "@/components/SocialLogin";
 import { useProcessRegisterMutation } from "@/redux/services/User";
 import { useToast } from "@/components/ui/use-toast";
 import ProssingAnimation from "@/components/ProssingAnimation";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 function Register() {
   interface IFormInput {
@@ -74,12 +77,10 @@ function Register() {
 
         <form className="mt-5 w-full" onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-5">
-            <label className="block mb-2 text-sm font-medium text-black dark:text-gray-300">
-              Name
-            </label>
-            <input
+            <Label className="Lable_style">Name</Label>
+            <Input
               type="text"
-              className="dark:bg-[#040717] bg-white border text-black dark:text-white sm:text-sm rounded-lg block w-full p-2.5 outline-none focus:border-[#f58220] placeholder-gray-400"
+              className="Input_style"
               placeholder="Enter your name"
               {...register("name", {
                 required: true,
@@ -94,13 +95,12 @@ function Register() {
             )}
           </div>
           <div className="mb-5">
-            <label className="block mb-2 text-sm font-medium text-black dark:text-gray-300">
-              Email
-            </label>
-            <input
+            <Label className="Lable_style">Email</Label>
+
+            <Input
               type="email"
               {...register("email", { required: true })}
-              className="dark:bg-[#040717] bg-white border text-black dark:text-white sm:text-sm rounded-lg block w-full p-2.5 outline-none focus:border-[#f58220] placeholder-gray-400"
+              className="Input_style"
               placeholder="Enter your email"
             />
             {errors.email && (
@@ -108,17 +108,16 @@ function Register() {
             )}
           </div>
           <div className="mb-5">
-            <label className="block mb-2 text-sm font-medium text-black dark:text-gray-300">
-              Password
-            </label>
-            <input
+            <Label className="Lable_style">Password</Label>
+
+            <Input
               type={checkbox ? "text" : "password"}
               {...register("password", {
                 required: true,
                 pattern:
                   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/,
               })}
-              className="dark:bg-[#040717] bg-white border  text-black dark:text-white sm:text-sm rounded-lg block w-full p-2.5 outline-none focus:border-[#f58220] placeholder-gray-400"
+              className="Input_style"
               placeholder="Enter your password"
             />
             {errors.password && (
@@ -129,13 +128,11 @@ function Register() {
             )}
           </div>
           <div className="mb-5">
-            <label className="block mb-2 text-sm font-medium text-black dark:text-gray-300">
-              Confirm Password
-            </label>
-            <input
+            <Label className="Lable_style">Confirm Password</Label>
+            <Input
               type={checkbox ? "text" : "password"}
               {...register("confirmPassword", { required: true })}
-              className="dark:bg-[#040717] bg-white border text-black dark:text-white sm:text-sm rounded-lg block w-full p-2.5 outline-none focus:border-[#f58220] placeholder-gray-400"
+              className="Input_style"
               placeholder="Confirm your password"
             />
             {errors.confirmPassword && (
@@ -157,13 +154,13 @@ function Register() {
             </label>
           </div>
 
-          <button
+          <Button
             type="submit"
             disabled={isLoading}
-            className="text-white mt-5 bg-[#f58220] hover:bg-orange-700 primary_button"
+            className="Button_style w-full"
           >
             {isLoading ? <ProssingAnimation /> : "Register"}
-          </button>
+          </Button>
         </form>
 
         <p className="dark:text-white text-black mt-2 text-sm">

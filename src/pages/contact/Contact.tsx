@@ -5,6 +5,10 @@ import { useAddContectInfoMutation } from "@/redux/services/ContactService";
 import ProssingAnimation from "@/components/ProssingAnimation";
 import { useToast } from "@/components/ui/use-toast";
 import { Helmet } from "react-helmet-async";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
 
 type FormInput = {
   name: string;
@@ -64,12 +68,10 @@ function ContectUs() {
           </div>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-5 mt-10">
-              <label className="block mb-2 text-sm font-medium text-black dark:text-gray-300">
-                Name
-              </label>
-              <input
+              <Label className="Lable_style">Name</Label>
+              <Input
                 type="text"
-                className="dark:bg-[#040717] bg-white border text-black dark:text-white sm:text-sm rounded-lg block w-full p-2.5 outline-none focus:border-[#f58220] placeholder-gray-400"
+                className="Input_style"
                 placeholder="Enter your name"
                 {...register("name", {
                   required: true,
@@ -84,13 +86,11 @@ function ContectUs() {
               )}
             </div>
             <div className="mb-5">
-              <label className="block mb-2 text-sm font-medium text-black dark:text-gray-300">
-                Email
-              </label>
-              <input
+              <Label className="Lable_style">Email</Label>
+              <Input
                 type="email"
                 {...register("email", { required: true })}
-                className="dark:bg-[#040717] bg-white border text-black dark:text-white sm:text-sm rounded-lg block w-full p-2.5 outline-none focus:border-[#f58220] placeholder-gray-400"
+                className="Input_style"
                 placeholder="Enter your email"
               />
               {errors.email && (
@@ -98,25 +98,23 @@ function ContectUs() {
               )}
             </div>
             <div>
-              <label className="block mb-2 text-sm font-medium text-black dark:text-gray-300">
-                Your Message
-              </label>
-              <textarea
-                className="bg-white dark:bg-[#040717] border text-black dark:text-white sm:text-sm rounded-lg block w-full p-2.5 outline-none focus:border-[#f58220] placeholder-gray-400 pb-10"
+              <Label className="Lable_style">Your Message</Label>
+              <Textarea
+                className="textarea_style"
                 {...register("message", { required: true })}
                 name="message"
                 required
                 placeholder="Enter your message..."
-              ></textarea>
+              ></Textarea>
             </div>
 
-            <button
+            <Button
               type="submit"
               disabled={isLoading}
-              className="text-white mt-5 bg-[#f58220] hover:bg-orange-700 primary_button"
+              className="Button_style w-full"
             >
               {isLoading ? <ProssingAnimation /> : "Submit"}
-            </button>
+            </Button>
           </form>
         </div>
         <div className="w-[40%]  hidden lg:block">

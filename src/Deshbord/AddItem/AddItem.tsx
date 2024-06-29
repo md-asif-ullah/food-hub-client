@@ -225,7 +225,7 @@ function AddItem() {
               Description
             </Label>
             <Textarea
-              className=" focus:border-[#f58220] mt-2 pb-16 text-black dark:text-white"
+              className="textarea_style"
               {...register("description", { required: true })}
               placeholder="Type your message here."
             />
