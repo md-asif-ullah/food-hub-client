@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import LoadingAnimation from "@/components/LoadingAnimation";
 import {
   useGetPopularProductsQuery,
@@ -48,8 +48,18 @@ function Product() {
   const { name, price, image, description, rating, _id } = product;
 
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const handleSubmit = async (product: IProduct) => {
+    if (!user) {
+      return (
+        navigate("/login"),
+        toast({
+          title: "please login first",
+        })
+      );
+    }
+
     const newProduct = {
       userId: user?._id,
       name: product.name,
@@ -82,6 +92,15 @@ function Product() {
   );
 
   const handleFavouriteProduct = async () => {
+    if (!user) {
+      return (
+        navigate("/login"),
+        toast({
+          title: "please login first",
+        })
+      );
+    }
+
     const newFavouriteProduct = {
       userId: user?._id,
       product_id: _id,

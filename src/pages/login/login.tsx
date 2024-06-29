@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import authBg from "@/assets/images/authImg/auth-bg-WWHEDCJO.png";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useState } from "react";
@@ -20,6 +20,9 @@ function Login() {
   const { toast } = useToast();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
 
   const {
     register,
@@ -32,7 +35,7 @@ function Login() {
       dispatch(setUser(res.payload));
 
       if (res.success) {
-        navigate("/");
+        navigate(from, { replace: true });
         toast({
           title: "sign in successfully",
           description: "You can now login to your account.",

@@ -1,10 +1,9 @@
-import { RootState } from "@/redux/Store";
 import { useGetCartItemQuery } from "@/redux/services/CartService";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 import ProductSummary from "./ProductSummary";
 import ProssingAnimation from "@/components/ProssingAnimation";
 import { Button } from "@/components/ui/button";
+import useUser from "../hooks/useUser";
 
 interface Iprops {
   setTotalPayAmount: (value: number) => void;
@@ -12,7 +11,7 @@ interface Iprops {
 }
 
 function OrderSummary({ setTotalPayAmount, isLoading }: Iprops) {
-  const user = useSelector((state: RootState) => state.user.currentUser);
+  const user = useUser();
   const { data } = useGetCartItemQuery(user?._id);
 
   const cartProducts = data?.payload || [];

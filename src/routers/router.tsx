@@ -6,6 +6,7 @@ import Customers from "@/Deshbord/customers/Customers";
 import EditCustomer from "@/Deshbord/customers/EditCustomer";
 import Deshboard from "@/Layouts/Deshboard";
 import Main from "@/Layouts/Main";
+import ProtectedRoutes from "@/components/ProtectedRoutes";
 import VerifyOtp from "@/components/VarifyOtp";
 import About from "@/pages/About/About";
 import Home from "@/pages/Home/Home";
@@ -45,7 +46,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/cart",
-        element: <Cart />,
+        element: (
+          <ProtectedRoutes>
+            <Cart />
+          </ProtectedRoutes>
+        ),
       },
       {
         path: "/about",
@@ -53,11 +58,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/payment-info",
-        element: <PaymentInfo />,
+        element: (
+          <ProtectedRoutes>
+            <PaymentInfo />
+          </ProtectedRoutes>
+        ),
       },
       {
         path: "/favourite",
-        element: <Favourite />,
+        element: (
+          <ProtectedRoutes>
+            <Favourite />
+          </ProtectedRoutes>
+        ),
       },
     ],
   },
@@ -80,6 +93,7 @@ const router = createBrowserRouter([
   {
     path: "/deshbord",
     element: <Deshboard />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/deshbord/profile",
