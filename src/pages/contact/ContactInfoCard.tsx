@@ -5,7 +5,7 @@ interface ContectCardProps {
   desc2: string;
 }
 
-function ContectCard({ icon, title, desc1, desc2 }: ContectCardProps) {
+function ContactInfoCard({ icon, title, desc1, desc2 }: ContectCardProps) {
   return (
     <div className=" text-white bg-[#f4f5f7] dark:bg-[#090d1f] p-7 rounded-xl">
       <div>
@@ -20,4 +20,4 @@ function ContectCard({ icon, title, desc1, desc2 }: ContectCardProps) {
   );
 }
 
-export default ContectCard;
+export default ContactInfoCard;

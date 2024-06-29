@@ -1,24 +1,24 @@
 import { FaPhoneAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";
-import ContectCard from "./ContectInfoCard";
+import ContactInfoCard from "./ContactInfoCard";
 
-function ContectInfo() {
+function ContactInfo() {
   return (
     <div className="space-y-6 lg:space-y-0 lg:space-x-6 lg:grid lg:grid-cols-3 xl:mx-20 mx-4">
-      <ContectCard
+      <ContactInfoCard
         icon={<FaPhoneAlt />}
         title="Call Us"
         desc1="*1234 ### 456"
         desc2="*1234 ### 123"
       />
-      <ContectCard
+      <ContactInfoCard
         icon={<MdEmail />}
         title="E-Mail"
         desc1="*user1@gmail.com"
         desc2="*user2@gmail.com"
       />
-      <ContectCard
+      <ContactInfoCard
         icon={<FaLocationDot />}
         title="Address"
         desc1="37125 Maya Estate Dr, Victoria Road,"
@@ -28,4 +28,4 @@ function ContectInfo() {
   );
 }
 
-export default ContectInfo;
+export default ContactInfo;

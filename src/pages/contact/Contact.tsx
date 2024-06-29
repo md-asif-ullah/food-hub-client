@@ -1,4 +1,3 @@
-import ContectInfo from "@/components/ContectInfo";
 import img from "../../assets/images/contectImg/download.svg";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useAddContectInfoMutation } from "@/redux/services/ContactService";
@@ -9,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import ContactInfo from "./ContactInfo";
 
 type FormInput = {
   name: string;
@@ -121,7 +121,7 @@ function ContectUs() {
           <img src={img} alt="" />
         </div>
       </div>
-      <ContectInfo />
+      <ContactInfo />
     </div>
   );
 }
