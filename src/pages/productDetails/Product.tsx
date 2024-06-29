@@ -13,12 +13,11 @@ import { useToast } from "@/components/ui/use-toast";
 import ProssingAnimation from "@/components/ProssingAnimation";
 import { useAddToCartMutation } from "@/redux/services/CartService";
 import { IProduct } from "@/components/type";
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/Store";
 import {
   useAddFavouriteProductMutation,
   useGetFavouriteProductsQuery,
 } from "@/redux/services/FavouriteService";
+import useUser from "../hooks/useUser";
 
 function Product() {
   const { id } = useParams<{ id: string }>();
@@ -33,8 +32,7 @@ function Product() {
   const [addToCart, { isLoading: addingProduct }] = useAddToCartMutation();
 
   //get user
-  const user = useSelector((state: RootState) => state.user.currentUser);
-
+  const user = useUser();
   //add favourite product
   const [addFavouriteProduct] = useAddFavouriteProductMutation();
 

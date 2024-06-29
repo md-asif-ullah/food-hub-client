@@ -1,13 +1,11 @@
-import { RootState } from "@/redux/Store";
+import useUser from "@/pages/hooks/useUser";
 import { CgProfile } from "react-icons/cg";
 import { FaCarSide, FaUtensils } from "react-icons/fa6";
 import { IoIosPeople } from "react-icons/io";
-import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 
 function DeshboardSidebar() {
-  const user = useSelector((state: RootState) => state.user.currentUser);
-
+  const user = useUser();
   const { pathname } = useLocation();
 
   const isAdmin = user?.isAdmin;

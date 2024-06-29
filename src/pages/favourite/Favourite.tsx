@@ -1,17 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
-import { RootState } from "@/redux/Store";
 import {
   useDeleteFavouriteProductMutation,
   useGetFavouriteProductsQuery,
 } from "@/redux/services/FavouriteService";
 import { Helmet } from "react-helmet-async";
 import { MdOutlineFavorite } from "react-icons/md";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import useUser from "../hooks/useUser";
 
 function Favourite() {
-  const user = useSelector((state: RootState) => state.user.currentUser);
+  const user = useUser();
   const { data: favouriteProduct } = useGetFavouriteProductsQuery(
     user?._id || ""
   );

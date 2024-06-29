@@ -1,12 +1,11 @@
 import VerifyOtp from "@/components/VarifyOtp";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { RootState } from "@/redux/Store";
+import useUser from "@/pages/hooks/useUser";
 import { useState } from "react";
-import { useSelector } from "react-redux";
 
 function NumberSection() {
-  const user = useSelector((state: RootState) => state.user.currentUser);
+  const user = useUser();
   const { phone } = user || {};
 
   const [showMobile, setShowMobile] = useState<boolean>(true);

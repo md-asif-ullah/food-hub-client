@@ -1,13 +1,12 @@
-import { RootState } from "@/redux/Store";
+import useUser from "@/pages/hooks/useUser";
 import { useGetCartItemQuery } from "@/redux/services/CartService";
 import { useGetFavouriteProductsQuery } from "@/redux/services/FavouriteService";
 import { IoCartOutline } from "react-icons/io5";
 import { MdOutlineFavorite } from "react-icons/md";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 function ShopAndFavourite() {
-  const user = useSelector((state: RootState) => state.user.currentUser);
+  const user = useUser();
   const { data: cartProduct } = useGetCartItemQuery(user?._id);
   const { data: favouriteProduct } = useGetFavouriteProductsQuery(
     user?._id || ""

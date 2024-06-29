@@ -1,15 +1,14 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import VerifyOtp from "@/components/VarifyOtp";
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/Store";
 import { useState } from "react";
+import useUser from "@/pages/hooks/useUser";
 
 function EmailSection() {
   const [showEmailVerifyOtp, setShowEmailVerifyOtp] = useState<boolean>(false);
   const [showEmail, setShowEmail] = useState<boolean>(true);
 
-  const user = useSelector((state: RootState) => state.user.currentUser);
+  const user = useUser();
   const { email } = user || {};
 
   // TODO: Implement handleUpdateEmail

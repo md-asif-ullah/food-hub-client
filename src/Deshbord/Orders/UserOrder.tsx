@@ -1,12 +1,11 @@
-import { RootState } from "@/redux/Store";
 import { useGetOrderByIdQuery } from "@/redux/services/OrderService";
-import { useSelector } from "react-redux";
 import OrderCart from "./OrderCart";
 import { IOrder } from "@/components/type";
 import LoadingAnimation from "@/components/LoadingAnimation";
+import useUser from "@/pages/hooks/useUser";
 
 function UserOrder() {
-  const user = useSelector((state: RootState) => state.user.currentUser);
+  const user = useUser();
   const { data, isLoading, isError } = useGetOrderByIdQuery(user?._id || "");
 
   return (

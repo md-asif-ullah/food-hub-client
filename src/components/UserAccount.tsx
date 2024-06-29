@@ -12,12 +12,13 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Link } from "react-router-dom";
 import { useLogOutMutation } from "@/redux/services/User";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { clearUser } from "@/redux/user/UserSlice";
 import { useToast } from "./ui/use-toast";
 import { FaCarSide, FaUtensils } from "react-icons/fa6";
 import { IoIosPeople } from "react-icons/io";
-import { RootState, persistor } from "@/redux/Store";
+import { persistor } from "@/redux/Store";
+import useUser from "@/pages/hooks/useUser";
 
 interface Pagetype {
   label: string;
@@ -29,7 +30,8 @@ function UserAccount({ style }: { style?: string }) {
   const dispatch = useDispatch();
   const { toast } = useToast();
 
-  const user = useSelector((state: RootState) => state.user.currentUser);
+  const user = useUser();
+
   const [logOut] = useLogOutMutation();
 
   const isAdmin = user?.isAdmin;

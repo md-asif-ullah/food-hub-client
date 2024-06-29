@@ -2,8 +2,6 @@ import LoadingAnimation from "@/components/LoadingAnimation";
 import { useGetCartItemQuery } from "@/redux/services/CartService";
 import { Link } from "react-router-dom";
 import SubCard from "./subCard";
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/Store";
 import {
   Table,
   TableBody,
@@ -13,9 +11,10 @@ import {
 } from "@/components/ui/table";
 import CartTableBody from "./CartTableBody";
 import { Helmet } from "react-helmet-async";
+import useUser from "../hooks/useUser";
 
 function Cart() {
-  const user = useSelector((state: RootState) => state.user.currentUser);
+  const user = useUser();
   const { data, isLoading, isError } = useGetCartItemQuery(user?._id);
 
   return (

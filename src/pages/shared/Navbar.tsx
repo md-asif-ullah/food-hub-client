@@ -9,9 +9,8 @@ import lightModeLogo from "../../assets/images/HomeImg/logo-dark-Be4neTbs.png";
 import ShopAndFavourite from "@/components/ShopAndFavourite";
 import { useTheme } from "@/theme/useTheme";
 import { ModeToggle } from "@/theme/modeToggle";
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/Store";
 import { SubmitHandler, useForm } from "react-hook-form";
+import useUser from "../hooks/useUser";
 
 interface page {
   name: string;
@@ -69,8 +68,7 @@ const pages: page[] = [
 ];
 
 const Navbar = () => {
-  const user = useSelector((state: RootState) => state.user.currentUser);
-
+  const user = useUser();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleNavbar = () => {

@@ -6,12 +6,12 @@ import { FiDollarSign } from "react-icons/fi";
 import paypalIcon from "@/assets/images/paymentIcon/download.svg";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import OrderSummary from "./OrderSummary";
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/Store";
 import { useState } from "react";
 import { useGetCartItemQuery } from "@/redux/services/CartService";
 import { useAddOrderMutation } from "@/redux/services/OrderService";
 import { useToast } from "@/components/ui/use-toast";
+import { Link } from "react-router-dom";
+import useUser from "../hooks/useUser";
 
 interface FormType {
   name: string;
@@ -27,7 +27,7 @@ function PaymentInfo() {
   const [error, setError] = useState<string>("");
 
   // get user data
-  const user = useSelector((state: RootState) => state.user.currentUser);
+  const user = useUser();
   const { data } = useGetCartItemQuery(user?._id);
 
   const { name, phone, address } = user || {};
@@ -74,6 +74,7 @@ function PaymentInfo() {
     try {
       const res = await addOrder(newOrderData).unwrap();
       if (res.success) {
+        <Link to="/dishes" />;
         toast({
           title: "Order Placed Successfully",
           description: res.message,

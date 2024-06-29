@@ -1,8 +1,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { RootState } from "@/redux/Store";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Calendar } from "@/components/ui/calendar";
 import { Input } from "@/components/ui/input";
 import {
@@ -19,6 +18,7 @@ import { useUpdateUserInfoMutation } from "@/redux/services/User";
 import { useToast } from "@/components/ui/use-toast";
 import { setUser } from "@/redux/user/UserSlice";
 import ProssingAnimation from "@/components/ProssingAnimation";
+import useUser from "@/pages/hooks/useUser";
 
 interface IFormInfoInput {
   name: string;
@@ -31,7 +31,7 @@ function InformationSection() {
   const { toast } = useToast();
   const dispatch = useDispatch();
 
-  const user = useSelector((state: RootState) => state.user.currentUser);
+  const user = useUser();
   const { name, gender, birthday, _id } = user || {};
 
   const [date, setDate] = useState<Date>();

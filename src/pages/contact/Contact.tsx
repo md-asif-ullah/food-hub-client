@@ -31,7 +31,7 @@ function ContectUs() {
   const onSubmit: SubmitHandler<FormInput> = async (data) => {
     try {
       const res = await addContectInfo(data).unwrap();
-      console.log(res);
+
       if (res.success) {
         toast.toast({
           title: "message send successfully",
