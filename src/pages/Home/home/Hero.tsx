@@ -7,11 +7,11 @@ import { MdOutlineSlowMotionVideo } from "react-icons/md";
 
 function Hero() {
   return (
-    <div className="h-full bg-gradient-to-r from-white dark:from-[#030617] to-[#fce8dd] dark:to-[#261215]  lg:grid lg:grid-cols-2  xl:px-24 lg:px-10 pb-10">
+    <div className="h-full bg-gradient-to-r from-white dark:from-[#030617] to-[#fce8dd] dark:to-[#261215] lg:grid lg:grid-cols-2  xl:px-24 lg:px-10 pb-10 pt-20">
       <div className="text-center lg:text-start space-y-7 pt-10 lg:pt-20">
-        <p className="text-[#e1781f] bg-[#fce8dd] dark:bg-[#352018] rounded-full w-32 p-2 mx-auto lg:mx-0">
+        <button className="text-[#e1781f] bg-[#fce8dd] dark:bg-[#352018] rounded-full py-2 px-3 mx-auto lg:mx-0">
           #Special Food
-        </p>
+        </button>
         <h2 className="text-black dark:text-white mx-14 md:mx-10 lg:mx-0 font-bold text-3xl md:text-5xl lg:pr-20 ">
           We Offer Delicious <span className="text-[#e1781f]">Food </span>
           Circle and Quick Service

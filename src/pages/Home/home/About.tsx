@@ -8,7 +8,7 @@ import cardimg3 from "../../../assets/images/HomeImg/vegetables-sYGdJ9FC.png";
 function AboutUs() {
   return (
     <div className="h-full mb:pt-20 pt-14 bg-white dark:bg-[#020617] pb-10 space-y-10 lg:space-y-0 px-4 lg:grid lg:grid-cols-2 xl:px-24">
-      <div className="">
+      <div>
         <img
           className="bg-[#f7f8f9] dark:bg-[#080c1d] md:w-full"
           src={aboutUsImg}
