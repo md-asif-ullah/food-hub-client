@@ -19,6 +19,7 @@ import { FaCarSide, FaUtensils } from "react-icons/fa6";
 import { IoIosPeople } from "react-icons/io";
 import { persistor } from "@/redux/Store";
 import useUser from "@/pages/hooks/useUser";
+import { MdFastfood } from "react-icons/md";
 
 interface Pagetype {
   label: string;
@@ -57,6 +58,11 @@ function UserAccount({ style }: { style?: string }) {
           label: "Add Item",
           to: "/deshbord/additem",
           icon: <FaUtensils />,
+        },
+        {
+          label: "Dishes List",
+          to: "/deshbord/dishes-list",
+          icon: <MdFastfood />,
         },
       ]
     : [

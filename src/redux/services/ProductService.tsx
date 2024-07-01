@@ -1,17 +1,17 @@
-import { IResponse, products } from "@/components/type";
+import { IResponse, ProductsResponse } from "@/components/type";
 import { baseQueryApi } from "@/pages/hooks/baseQueryWithReauth";
 
 export const productApi = baseQueryApi.injectEndpoints({
   endpoints: (builder) => ({
-    getAllProducts: builder.query<products, string>({
+    getAllProducts: builder.query<any, string>({
       query: (query) => `/products?${query}`,
       providesTags: ["Products"],
     }),
-    getProduct: builder.query<products, string>({
+    getProduct: builder.query<ProductsResponse, string>({
       query: (id) => `/products/${id}`,
       providesTags: ["Products"],
     }),
-    getPopularProducts: builder.query<products, void>({
+    getPopularProducts: builder.query<ProductsResponse, void>({
       query: () => "/products/popular",
       providesTags: ["Products"],
     }),
@@ -23,6 +23,11 @@ export const productApi = baseQueryApi.injectEndpoints({
       }),
       invalidatesTags: ["Products"],
     }),
+
+    getProductsForAdmin: builder.query<ProductsResponse, { search: string }>({
+      query: ({ search }) => `/products/admin?search=${search}`,
+      providesTags: ["Products"],
+    }),
   }),
 });
 
@@ -31,4 +36,5 @@ export const {
   useGetProductQuery,
   useGetPopularProductsQuery,
   useCreateProductMutation,
+  useGetProductsForAdminQuery,
 } = productApi;

@@ -50,12 +50,6 @@ export interface ILogin {
   password: string;
 }
 
-export interface products {
-  statusCode: number;
-  message: string;
-  payload: any;
-}
-
 export interface IProduct {
   _id: string;
   name: string;
@@ -126,4 +120,22 @@ export interface IOrder {
   cartProducts: IProduct[];
   status: string;
   message?: string | undefined;
+}
+
+export interface Products {
+  _id: string;
+  name: string;
+  price: number;
+  image: string;
+  quantity: number;
+  category: string;
+  discount: number;
+  description: string;
+  createdAt: string;
+}
+
+export interface ProductsResponse {
+  statusCode: number;
+  message: string;
+  payload: Products[];
 }
