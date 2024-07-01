@@ -1,4 +1,8 @@
-import { IResponse, ProductsResponse } from "@/components/type";
+import {
+  IResponse,
+  ProductsResponse,
+  getproductResponse,
+} from "@/components/type";
 import { baseQueryApi } from "@/pages/hooks/baseQueryWithReauth";
 
 export const productApi = baseQueryApi.injectEndpoints({
@@ -7,7 +11,7 @@ export const productApi = baseQueryApi.injectEndpoints({
       query: (query) => `/products?${query}`,
       providesTags: ["Products"],
     }),
-    getProduct: builder.query<ProductsResponse, string>({
+    getProduct: builder.query<getproductResponse, string>({
       query: (id) => `/products/${id}`,
       providesTags: ["Products"],
     }),

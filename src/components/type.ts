@@ -139,3 +139,9 @@ export interface ProductsResponse {
   message: string;
   payload: Products[];
 }
+
+export interface getproductResponse {
+  statusCode: number;
+  message: string;
+  payload: any;
+}

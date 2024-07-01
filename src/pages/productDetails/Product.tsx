@@ -12,7 +12,7 @@ import Rating from "@/components/Rating";
 import { useToast } from "@/components/ui/use-toast";
 import ProssingAnimation from "@/components/ProssingAnimation";
 import { useAddToCartMutation } from "@/redux/services/CartService";
-import { IProduct } from "@/components/type";
+
 import {
   useAddFavouriteProductMutation,
   useGetFavouriteProductsQuery,
@@ -50,7 +50,7 @@ function Product() {
   const { toast } = useToast();
   const navigate = useNavigate();
 
-  const handleSubmit = async (product: IProduct) => {
+  const handleSubmit = async () => {
     if (!user) {
       return (
         navigate("/login"),
@@ -62,9 +62,10 @@ function Product() {
 
     const newProduct = {
       userId: user?._id,
-      name: product.name,
-      price: product.price,
-      image: product.image,
+      name: name,
+      price: price,
+      quantity: 1,
+      image: image,
       size: size,
     };
 
@@ -186,7 +187,7 @@ function Product() {
           </div>
           <div className="flex items-center mt-10 space-x-2">
             <button
-              onClick={() => handleSubmit(product)}
+              onClick={() => handleSubmit()}
               disabled={Boolean(findProduct)}
               className="secondary_button inline-flex bg-[#f58220] hover:bg-orange-700 px-4 space-x-2"
             >
