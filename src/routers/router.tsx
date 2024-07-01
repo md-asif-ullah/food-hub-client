@@ -1,5 +1,6 @@
 import AddItem from "@/Deshbord/AddItem/AddItem";
 import AdminProducts from "@/Deshbord/Admin/products/AdminProducts";
+import EditProducts from "@/Deshbord/Admin/products/EditProducts";
 import AdminOrders from "@/Deshbord/AdminOrders/AdminOrders";
 import UserOrder from "@/Deshbord/Orders/UserOrder";
 import Profile from "@/Deshbord/Profile/Profile";
@@ -123,6 +124,10 @@ const router = createBrowserRouter([
       {
         path: "/deshbord/dishes-list",
         element: <AdminProducts />,
+      },
+      {
+        path: "/deshbord/product/:id",
+        element: <EditProducts />,
       },
     ],
   },

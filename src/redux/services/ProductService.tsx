@@ -28,6 +28,15 @@ export const productApi = baseQueryApi.injectEndpoints({
       query: ({ search }) => `/products/admin?search=${search}`,
       providesTags: ["Products"],
     }),
+
+    updateProduct: builder.mutation<IResponse, Partial<any>>({
+      query: ({ id, formData }) => ({
+        url: `/products/update/${id}`,
+        method: "PUT",
+        body: formData,
+      }),
+      invalidatesTags: ["Products"],
+    }),
   }),
 });
 
@@ -37,4 +46,5 @@ export const {
   useGetPopularProductsQuery,
   useCreateProductMutation,
   useGetProductsForAdminQuery,
+  useUpdateProductMutation,
 } = productApi;
