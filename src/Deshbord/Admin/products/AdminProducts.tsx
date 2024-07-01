@@ -64,7 +64,7 @@ function AdminProducts() {
               <TableHead>description</TableHead>
               <TableHead>Discount</TableHead>
               <TableHead className="text-center">Edit</TableHead>
-              <TableHead>Action</TableHead>
+              <TableHead className="text-center">Action</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
