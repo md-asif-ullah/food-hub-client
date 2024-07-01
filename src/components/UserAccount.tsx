@@ -15,68 +15,16 @@ import { useLogOutMutation } from "@/redux/services/User";
 import { useDispatch } from "react-redux";
 import { clearUser } from "@/redux/user/UserSlice";
 import { useToast } from "./ui/use-toast";
-import { FaCarSide, FaUtensils } from "react-icons/fa6";
-import { IoIosPeople } from "react-icons/io";
 import { persistor } from "@/redux/Store";
-import useUser from "@/pages/hooks/useUser";
-import { MdFastfood } from "react-icons/md";
-
-interface Pagetype {
-  label: string;
-  to: string;
-  icon: JSX.Element;
-}
+import useDeshboardSegments from "./hooks/useDeshboardSegments";
 
 function UserAccount({ style }: { style?: string }) {
   const dispatch = useDispatch();
   const { toast } = useToast();
 
-  const user = useUser();
-
   const [logOut] = useLogOutMutation();
 
-  const isAdmin = user?.isAdmin;
-
-  const deshboardSegments: Pagetype[] = isAdmin
-    ? [
-        {
-          label: "Profile",
-          to: "/deshbord/profile",
-          icon: <CgProfile />,
-        },
-        {
-          label: "Orders",
-          to: "/deshbord/Orders",
-          icon: <FaCarSide />,
-        },
-        {
-          label: "Customers",
-          to: "/deshbord/customers",
-          icon: <IoIosPeople />,
-        },
-        {
-          label: "Add Item",
-          to: "/deshbord/additem",
-          icon: <FaUtensils />,
-        },
-        {
-          label: "Dishes List",
-          to: "/deshbord/dishes-list",
-          icon: <MdFastfood />,
-        },
-      ]
-    : [
-        {
-          label: "Profile",
-          to: "/deshbord/profile",
-          icon: <CgProfile />,
-        },
-        {
-          label: "My Orders",
-          to: "/deshbord/userOrders",
-          icon: <FaCarSide />,
-        },
-      ];
+  const deshboardSegments = useDeshboardSegments();
 
   const handleLogOut = async () => {
     try {

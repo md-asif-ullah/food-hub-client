@@ -1,53 +1,14 @@
-import useUser from "@/pages/hooks/useUser";
-import { CgProfile } from "react-icons/cg";
-import { FaCarSide, FaUtensils } from "react-icons/fa6";
-import { IoIosPeople } from "react-icons/io";
+import useDeshboardSegments from "@/components/hooks/useDeshboardSegments";
+
 import { Link, useLocation } from "react-router-dom";
 
 function DeshboardSidebar() {
-  const user = useUser();
   const { pathname } = useLocation();
+  const deshboardSegments = useDeshboardSegments();
 
-  const isAdmin = user?.isAdmin;
-
-  const segments = isAdmin
-    ? [
-        {
-          label: "Profile",
-          to: "/deshbord/profile",
-          icon: <CgProfile />,
-        },
-        {
-          label: "Orders",
-          to: "/deshbord/Orders",
-          icon: <FaCarSide />,
-        },
-        {
-          label: "Customers",
-          to: "/deshbord/customers",
-          icon: <IoIosPeople />,
-        },
-        {
-          label: "Add Item",
-          to: "/deshbord/additem",
-          icon: <FaUtensils />,
-        },
-      ]
-    : [
-        {
-          label: "Profile",
-          to: "/deshbord/profile",
-          icon: <CgProfile />,
-        },
-        {
-          label: "My Orders",
-          to: "/deshbord/userOrders",
-          icon: <FaCarSide />,
-        },
-      ];
   return (
     <div className="space-y-2 flex flex-col dark:bg-[#020817] h-full pl-5 w-64">
-      {segments.map((segment, index) => {
+      {deshboardSegments.map((segment, index) => {
         const isActive = pathname === segment.to;
         return (
           <Link
