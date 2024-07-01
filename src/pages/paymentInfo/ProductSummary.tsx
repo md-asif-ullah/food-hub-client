@@ -15,7 +15,7 @@ function ProductSummary({ item }: IProps) {
         alt={name}
       />
       <div>
-        <h4 className="font-medium text-[#cbd5e1]">{name}</h4>
+        <h4 className="font-medium text-black dark:text-[#cbd5e1]">{name}</h4>
         <p className="flex items-center space-x-1 text-[#626d81]">
           <span>{quantity}</span> <RxCross2 />
           <span className="text-[#f97316]">${price.toFixed(2)}</span>

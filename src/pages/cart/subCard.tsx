@@ -18,25 +18,27 @@ function SubCard({ data }: props) {
   const total = subTotal + tax;
 
   return (
-    <div className="border border-[#1e293b] w-full p-4 rounded-xl lg:h-[290px]">
-      <h2 className="text-xl font-semibold">Cart Total</h2>
+    <div className="border dark:border-[#1e293b] border-[#e2e8f0] w-full p-4 rounded-xl lg:h-[290px]">
+      <h2 className="text-xl text-black dark:text-white font-semibold">
+        Cart Total
+      </h2>
       <div className="space-y-3 mt-5">
         <div className="flex justify-between">
           <h4 className="text-[#627188]">Sub-total</h4>
-          <p>${subTotal.toFixed(3)}</p>
+          <p className="text-black dark:text-white">${subTotal.toFixed(3)}</p>
         </div>
         <div className="flex justify-between">
           <h4 className="text-[#627188]">Delivery</h4>
-          <p>Free</p>
+          <p className="text-black dark:text-white">Free</p>
         </div>
         <div className="flex justify-between">
           <h4 className="text-[#627188]">Tax</h4>
-          <p>+${tax.toFixed(3)}</p>
+          <p className="text-black dark:text-white">+${tax.toFixed(3)}</p>
         </div>
-        <hr className="mt-6 border-[#1e293b] sm:mx-auto lg:mt-8" />
+        <hr className="mt-6 dark:border-[#1e293b] border-[#e2e8f0] sm:mx-auto lg:mt-8" />
         <div className="flex justify-between">
-          <h4>Total</h4>
-          <p>${total.toFixed(3)}</p>
+          <h4 className="text-black dark:text-white">Total</h4>
+          <p className="text-black dark:text-white">${total.toFixed(3)}</p>
         </div>
       </div>
       <Link to="/payment-info">

@@ -158,7 +158,9 @@ function Product() {
                   return setButtonStyle("s"), setSize("small");
                 }}
                 className={`px-3 py-[3px] rounded-full  ${
-                  buttonStyle === "s" ? "bg-[#f58220]" : "bg-[#1e293b]"
+                  buttonStyle === "s"
+                    ? "bg-[#f58220]"
+                    : "bg-[#fef2e8] dark:bg-[#1e293b]"
                 }`}
               >
                 S
@@ -168,7 +170,9 @@ function Product() {
                   return setButtonStyle("m"), setSize("medium");
                 }}
                 className={`px-[10px] py-[4px] rounded-full  ${
-                  buttonStyle === "m" ? "bg-[#f58220]" : "bg-[#1e293b]"
+                  buttonStyle === "m"
+                    ? "bg-[#f58220]"
+                    : "bg-[#fef2e8] dark:bg-[#1e293b]"
                 }`}
               >
                 M
@@ -178,7 +182,9 @@ function Product() {
                   return setButtonStyle("l"), setSize("large");
                 }}
                 className={`px-3 py-[4px] rounded-full  ${
-                  buttonStyle === "l" ? "bg-[#f58220]" : "bg-[#1e293b]"
+                  buttonStyle === "l"
+                    ? "bg-[#f58220]"
+                    : "bg-[#fef2e8] dark:bg-[#1e293b]"
                 }`}
               >
                 L
@@ -189,7 +195,7 @@ function Product() {
             <button
               onClick={() => handleSubmit()}
               disabled={Boolean(findProduct)}
-              className="secondary_button inline-flex bg-[#f58220] hover:bg-orange-700 px-4 space-x-2"
+              className="secondary_button inline-flex bg-[#f58220] hover:bg-orange-700 px-4 space-x-2 text-white"
             >
               {addingProduct ? (
                 <ProssingAnimation />
@@ -203,7 +209,7 @@ function Product() {
 
             <button disabled={findProduct} onClick={handleFavouriteProduct}>
               <MdOutlineFavorite
-                className={`hover_effcet text-3xl bg-black hover:text-red-600 ${
+                className={`hover_effcet text-3xl dark:bg-black hover:text-red-600 ${
                   findProduct ? "text-red-600" : ""
                 }`}
               />

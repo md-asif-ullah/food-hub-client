@@ -93,7 +93,7 @@ function PaymentInfo() {
 
   return (
     <form className="" onSubmit={handleSubmit(onSubmit)}>
-      <div className="pt-28 xl:px-14 px-5 grid grid-cols-8 gap-20 bg-[#020617]">
+      <div className="pt-28 xl:px-14 px-5 grid grid-cols-8 gap-20 bg-white dark:bg-[#020617]">
         <div className="text-white min-h-[80vh] col-span-5">
           <div className="xl:col-span-2 mt-14 xl:mt-0 ">
             <div className="grid grid-cols-2 gap-6">
@@ -158,11 +158,13 @@ function PaymentInfo() {
           </div>
 
           <div className="mt-10">
-            <h1 className="text-xl font-semibold mb-4">Payment Option</h1>
+            <h1 className="text-xl font-semibold mb-4 text-black dark:text-white">
+              Payment Option
+            </h1>
             <RadioGroup
               name="paymentMethod"
               onChange={handleChange}
-              className="flex justify-between max-w-[656px] h-[200px] border border-[#1e293b] rounded-lg px-20 py-10"
+              className="flex justify-between max-w-[656px] h-[200px] border border-[#e2e8f0] dark:border-[#1e293b] rounded-lg px-20 py-10"
             >
               <div className="flex flex-col items-center space-y-5 cursor-pointer">
                 <Label
@@ -170,7 +172,9 @@ function PaymentInfo() {
                   className="cursor-pointer text-center flex flex-col items-center"
                 >
                   <FiDollarSign className="text-3xl text-[#f58220]" />
-                  <span className="w-20 mt-2">Cash on Delivery</span>
+                  <span className="w-20 mt-2 text-black dark:text-white">
+                    Cash on Delivery
+                  </span>
                 </Label>
                 <RadioGroupItem
                   id="cash-on-delivery"
@@ -183,7 +187,9 @@ function PaymentInfo() {
                   className="text-center cursor-pointer flex flex-col items-center"
                 >
                   <img src={paypalIcon} alt="Paypal" className="h-8 w-8" />
-                  <span className="w-20 mt-2">Paypal</span>
+                  <span className="w-20 mt-2 text-black dark:text-white">
+                    Paypal
+                  </span>
                 </Label>
                 <RadioGroupItem value="Paypal" id="Paypal" />
               </div>

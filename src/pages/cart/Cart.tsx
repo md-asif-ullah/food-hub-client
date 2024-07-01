@@ -18,7 +18,7 @@ function Cart() {
   const { data, isLoading, isError } = useGetCartItemQuery(user?._id);
 
   return (
-    <div className="bg-[#040717] pt-20 overflow-auto">
+    <div className="dark:bg-[#040717] bg-white pt-40 overflow-auto">
       <Helmet>
         <title>Cart | Best Online restaurant</title>
       </Helmet>
@@ -30,7 +30,7 @@ function Cart() {
       {isLoading && <LoadingAnimation />}
       <div className="h-full text-white md:px-10 xl:px-10 lg:px-4 px-4 lg:grid space-y-7 lg:space-y-0 lg:grid-cols-3 lg:gap-x-7 ">
         <div className="col-span-2">
-          <div className="border border-[#1e293b] text-2xl rounded-t-xl">
+          <div className="border border-[#e2e8f0] dark:border-[#1e293b] text-2xl rounded-t-xl">
             <h2 className="text-start p-5">Shopping Cart</h2>
           </div>
           <Table className="border border-[#e2e8f0] dark:border-[#1e293b]">
@@ -49,7 +49,7 @@ function Cart() {
             </TableBody>
           </Table>
 
-          <div className="border border-[#1e293b] p-5 rounded-b-xl">
+          <div className="border border-[#e2e8f0] dark:border-[#1e293b] p-5 rounded-b-xl">
             <Link to="/dishes">
               <button className="text-[#f58220] border border-[#f58220] px-[20px] py-2 rounded-xl hover:text-white hover:bg-[#f58220] duration-700">
                 Shop More

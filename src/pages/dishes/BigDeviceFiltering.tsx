@@ -97,7 +97,10 @@ function BigDeviceFiltering({
             key={index}
             className="flex items-center mb-4 cursor-pointer"
           >
-            <Checkbox checked={searchParams.category.includes(text)} />
+            <Checkbox
+              className="border-[#94a3b8] dark:border-[#1e293b]"
+              checked={searchParams.category.includes(text)}
+            />
             <label className="ms-2 font-medium text-gray-900 dark:text-[#6a7589]">
               {text}
             </label>
@@ -115,23 +118,23 @@ function BigDeviceFiltering({
             type="number"
             {...register("minPrice")}
             placeholder="Min"
-            className="max-w-20 text-black pl-2 focus:outline-none border-[#1e293b] border"
+            className="max-w-20 text-black pl-2 focus:outline-none border-[#94a3b8] dark:border-[#1e293b] border"
           />
           <input
             type="number"
             {...register("maxPrice")}
             placeholder="Max"
-            className="max-w-20 text-black pl-2 focus:outline-none border-[#1e293b] border"
+            className="max-w-20 text-black pl-2 focus:outline-none border-[#94a3b8] dark:border-[#1e293b] border"
           />
           <button
             type="submit"
-            className="bg-[#f96f2b] px-4 text-sm py-1 rounded"
+            className="bg-[#f96f2b] px-4 text-sm py-1 rounded text-white"
           >
             Apply
           </button>
         </form>
       </div>
-      <hr className="mt-6 border-[#e2e8f0] dark:border-[#1e293b]" />
+      <hr className="mt-6 border-[#94a3b8] dark:border-[#1e293b]" />
       <div className="mt-5">
         <h1 className="text-lg">Rating</h1>
         {[5, 4, 3, 2, 1].map((rating, index) => (

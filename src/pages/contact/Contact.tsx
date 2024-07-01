@@ -57,7 +57,7 @@ function ContectUs() {
         <div className="pt-10 mb-5 md:mb-0 lg:ml-20 md:mx-auto mx-5">
           <div className="text-center mx-auto ">
             <div className="text-start max-w-md">
-              <h3 className="text-4xl text-white font-medium">
+              <h3 className="text-4xl text-black dark:text-white font-medium">
                 Contact Information
               </h3>
               <p className="text-[#717aa1] text-sm mt-4">

@@ -33,9 +33,9 @@ function OrderSummary({ setTotalPayAmount, isLoading }: Iprops) {
   }, [total, setTotalPayAmount]);
 
   return (
-    <div className="border border-[#1e293b] w-full p-4 rounded-xl ">
+    <div className="border border-[#e2e8f0] dark:border-[#1e293b] w-full p-4 rounded-xl ">
       <h2 className="text-xl font-semibold">Order Summary</h2>
-      <div className="border-b border-[#1e293b]">
+      <div className="border-b border-[#e2e8f0] dark:border-[#1e293b]">
         {cartItems.map((item) => (
           <ProductSummary key={item._id} item={item} />
         ))}
@@ -53,7 +53,7 @@ function OrderSummary({ setTotalPayAmount, isLoading }: Iprops) {
           <h4 className="text-[#627188]">Tax</h4>
           <p>+${tax.toFixed(2)}</p>
         </div>
-        <hr className="mt-6 border-[#1e293b] sm:mx-auto lg:mt-8" />
+        <hr className="mt-6 border-[#e2e8f0] dark:border-[#1e293b] sm:mx-auto lg:mt-8" />
         <div className="flex justify-between">
           <h4>Total</h4>
           <p>${total.toFixed(2)}</p>

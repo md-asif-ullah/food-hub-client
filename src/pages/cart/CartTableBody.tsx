@@ -66,10 +66,10 @@ function CartTableBody({ item }: props) {
       </TableCell>
       <TableCell>{size}</TableCell>
       <TableCell>
-        <div className="bg-[#020617] w-[110px] py-[4px]  space-x-5 flex items-center justify-center border border-[#1e293b] rounded-2xl">
+        <div className=" w-[110px] py-[4px]  space-x-5 flex items-center justify-center border dark:border-[#1e293b] border-[#e2e8f0] rounded-2xl">
           {quantity === 1 ? (
             <i
-              className="bg-[#1e293b] rounded-full p-[5px]"
+              className="bg-[#fef2e8] dark:bg-[#1e293b] rounded-full p-[5px]"
               onClick={handleDelete}
             >
               <MdDeleteOutline className="cursor-pointer text-red-700 focus:outline-none" />
@@ -77,16 +77,16 @@ function CartTableBody({ item }: props) {
           ) : (
             <button
               onClick={() => handleLowQuantity()}
-              className="bg-[#1e293b] text-white py-[2px] px-[11px] rounded-full focus:outline-none"
+              className="bg-[#fef2e8] dark:bg-[#1e293b] text-black dark:text-white py-[2px] px-[11px] rounded-full focus:outline-none"
             >
               -
             </button>
           )}
-          <h4 className="text-white ">{quantity}</h4>
+          <h4 className="dark:text-white text-black ">{quantity}</h4>
 
           <button
             onClick={() => handleHighQuantity()}
-            className="bg-[#1e293b] text-white py-[2px] px-[9px] rounded-full focus:outline-none"
+            className="bg-[#fef2e8] dark:bg-[#1e293b] text-black dark:text-white py-[2px] px-[9px] rounded-full focus:outline-none"
           >
             +
           </button>

@@ -18,7 +18,7 @@ function FoodCard({ product }: product) {
   return (
     <Link to={`/product/${_id}`}>
       <div
-        className={`border border-stone-800 group hover:border-orange-500 transition duration-300 dark:bg-[#020617] bg-white rounded-lg p-3 cursor-pointer`}
+        className={`border border-[#e2e8f0] dark:border-stone-800 group hover:border-orange-500 transition duration-300 dark:bg-[#020617] bg-white rounded-lg p-3 cursor-pointer`}
       >
         <img
           className="h-[255px] w-full lg:h-[210px] object-cover rounded-md"
@@ -35,7 +35,7 @@ function FoodCard({ product }: product) {
             <p className="text-black dark:text-white">{rating}</p>
           </div>
 
-          <p className="text-amber-500 text-xl font-medium">${price}</p>
+          <p className="text-amber-500 text-2xl font-medium">${price}</p>
         </div>
       </div>
     </Link>
