@@ -4,8 +4,8 @@ import { RiMenu3Line } from "react-icons/ri";
 import { RxCross2 } from "react-icons/rx";
 import { IoIosSearch } from "react-icons/io";
 import UserAccount from "@/components/UserAccount";
-import darkModeLogo from "../../assets/images/HomeImg/logo-light-vHhBX6Zj.png";
-import lightModeLogo from "../../assets/images/HomeImg/logo-dark-Be4neTbs.png";
+import lightModeLogo from "../../assets/images/HomeImg/logo-light-vHhBX6Zj.png";
+import darkModeLogo from "../../assets/images/HomeImg/logo-dark-Be4neTbs.png";
 import ShopAndFavourite from "@/components/ShopAndFavourite";
 import { useTheme } from "@/theme/useTheme";
 import { ModeToggle } from "@/theme/modeToggle";
@@ -93,15 +93,11 @@ const Navbar = () => {
         <div className="flex justify-between items-center  h-20">
           <Link to="/">
             <div className="hidden sm:block">
-              {theme === "light" ? (
-                <img className="sm:w-36 w-32 " src={lightModeLogo} alt="logo" />
-              ) : (
-                <img
-                  className="sm:w-36 w-32 sm:block"
-                  src={darkModeLogo}
-                  alt="logo"
-                />
-              )}
+              <img
+                className="sm:w-36 w-32 "
+                src={theme === "light" ? darkModeLogo : lightModeLogo}
+                alt="logo"
+              />
             </div>
           </Link>
 
