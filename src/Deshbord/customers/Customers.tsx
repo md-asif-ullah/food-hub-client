@@ -24,7 +24,7 @@ import { Helmet } from "react-helmet-async";
 function Customers() {
   const [page, setPage] = useState<number>(1);
   const [search, setSearch] = useState<string>("");
-  const limit = 5;
+  const limit = 10;
 
   // Fetch all users using rtk query
   const { data, isLoading, isError } = useGetUsersQuery({

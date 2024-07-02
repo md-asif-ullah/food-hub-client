@@ -12,56 +12,92 @@ import {
 } from "@/components/ui/select";
 import { useToast } from "@/components/ui/use-toast";
 import {
+  useDeleteUserMutation,
   useGetUserQuery,
   useUpdateUserInfoMutation,
 } from "@/redux/services/User";
-import { useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
-
-interface IFormInput {
-  name: string;
-  email: string;
-  phone: string;
-}
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 function EditCustomer() {
-  const [role, setRole] = useState<boolean>();
-  const [status, setStatus] = useState<boolean>();
-
   const { id } = useParams();
   const { data, isLoading } = useGetUserQuery(id ?? "");
   const user = data?.payload || {};
 
-  const { toast } = useToast();
+  const { name, email, phone, isAdmin, isBanned } = user;
 
+  const [selectRole, setSelectRole] = useState(isAdmin || false);
+  const [selectStatus, setSelectStatus] = useState(isBanned || false);
+  const [inputname, setInputname] = useState(name || "");
+  const [inputemail, setInputemail] = useState(email || "");
+  const [inputphone, setInputphone] = useState(phone || "");
+
+  useEffect(() => {
+    if (data) {
+      setSelectRole(isAdmin);
+      setSelectStatus(isBanned);
+      setInputname(name);
+      setInputemail(email);
+      setInputphone(phone);
+    }
+  }, [name, email, phone, isAdmin, isBanned, data]);
+
+  const { toast } = useToast();
+  const navigate = useNavigate();
+
+  // Update user info
   const [updateUserInfo, { isLoading: updatingInfo }] =
     useUpdateUserInfoMutation();
 
-  const { register, handleSubmit } = useForm<IFormInput>();
+  const [deleteUser, { isLoading: deletingUser }] = useDeleteUserMutation();
 
-  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+  const handleUpdateUser = async () => {
     const newData = {
-      ...data,
-      isAdmin: role,
-      isBanned: status,
+      name: inputname,
+      email: inputemail,
+      phone: inputphone,
+      isAdmin: selectRole,
+      isBanned: selectStatus,
     };
-    console.log(newData);
     try {
-      const res = await updateUserInfo({ id: user._id, body: newData });
+      const res = await updateUserInfo({
+        id: user._id,
+        body: newData,
+      }).unwrap();
 
-      if (res.data) {
+      if (res.success) {
+        navigate("/deshbord/customers");
         toast({
-          title: "Product Added",
-          description: "user updated successfully",
+          title: "Success",
+          description: "User updated successfully",
         });
       }
     } catch (error: any) {
-      console.log(error.data);
+      console.log(error);
       toast({
         variant: "destructive",
         title: "Error",
-        description: error.data.message || "Something went wrong",
+        description: error.message || "Something went wrong",
+      });
+    }
+  };
+
+  const handleDeleteUser = async () => {
+    try {
+      const res = await deleteUser(user._id).unwrap();
+
+      if (res.success) {
+        navigate("/deshbord/customers");
+        toast({
+          title: "Success",
+          description: "User deleted successfully",
+        });
+      }
+    } catch (error: any) {
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: error.message,
       });
     }
   };
@@ -73,20 +109,17 @@ function EditCustomer() {
       </h1>
       {isLoading && <LoadingAnimation />}
       <div className="border dark:border-[#1e293b] border-[#e2e8f0] md:m-10 m-5 rounded-lg">
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="p-6 rounded-md shadow-md"
-        >
+        <div className="p-6 rounded-md shadow-md">
           <div className="mb-5">
             <Label className="block text-[#17172a] dark:text-white mb-2">
               Name
             </Label>
             <Input
               type="text"
-              defaultValue={user.name}
-              placeholder="Product name"
+              value={inputname}
+              onChange={(e) => setInputname(e.target.value)}
+              placeholder="Name"
               className="w-full p-2 border rounded focus:border-[#f58220] mt-2 text-black dark:text-white"
-              {...register("name")}
             />
           </div>
           <div className="grid sm:grid-cols-2 sm:gap-6">
@@ -96,10 +129,10 @@ function EditCustomer() {
               </Label>
               <Input
                 type="email"
-                defaultValue={user.email}
+                value={inputemail}
+                onChange={(e) => setInputemail(e.target.value)}
                 placeholder="Email"
                 className="w-full p-2 border rounded focus:border-[#f58220] mt-2 text-black dark:text-white"
-                {...register("email")}
               />
             </div>
             <div className="mb-5">
@@ -108,10 +141,10 @@ function EditCustomer() {
               </Label>
               <Input
                 type="number"
-                defaultValue={user.phone}
+                value={inputphone}
+                onChange={(e) => setInputphone(e.target.value)}
                 placeholder="Phone"
                 className="w-full p-2 border rounded focus:border-[#f58220] mt-2 text-black dark:text-white"
-                {...register("phone")}
               />
             </div>
           </div>
@@ -121,8 +154,8 @@ function EditCustomer() {
                 Role
               </Label>
               <Select
-                value={user?.isAdmin ? "true" : "false"}
-                onValueChange={(value) => setRole(value === "true")}
+                value={selectRole ? "true" : "false"}
+                onValueChange={(value) => setSelectRole(value === "true")}
               >
                 <SelectTrigger>
                   <SelectValue placeholder="Role" />
@@ -138,8 +171,8 @@ function EditCustomer() {
                 Status
               </Label>
               <Select
-                value={user?.isBanned ? "true" : "false"}
-                onValueChange={(value) => setStatus(value === "true")}
+                value={selectStatus ? "true" : "false"}
+                onValueChange={(value) => setSelectStatus(value === "true")}
               >
                 <SelectTrigger>
                   <SelectValue placeholder="Status" />
@@ -153,18 +186,22 @@ function EditCustomer() {
           </div>
 
           <div className="text-right sm:space-x-5 flex flex-col sm:block">
-            <Button className="bg-[#f58220] hover:bg-orange-700 duration-500 text-white">
-              {isLoading ? <ProssingAnimation /> : "Delete Customer"}
+            <Button
+              onClick={handleDeleteUser}
+              className="bg-[#f58220] hover:bg-orange-700 duration-500 text-white"
+            >
+              {deletingUser ? <ProssingAnimation /> : "Delete Customer"}
             </Button>
 
             <Button
+              onClick={handleUpdateUser}
               type="submit"
               className="text-white bg-[#f58220] hover:bg-orange-700 duration-500 my-3"
             >
               {updatingInfo ? <ProssingAnimation /> : "Save Changes"}
             </Button>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );
