@@ -30,9 +30,9 @@ function Verify() {
         setValue("");
         toast({
           title: "Account verified successfully",
-          description: "You can now register to your account.",
+          description: "please login to your account.",
         });
-        navigate("/");
+        navigate("/login");
       }
     } catch (error: any) {
       setValue("");
