@@ -1,4 +1,10 @@
-import { ILogin, IResponse, IVerify, UserData } from "@/components/type";
+import {
+  ILogin,
+  IResponse,
+  IVerify,
+  SocialLogin,
+  UserData,
+} from "@/components/type";
 import { createApi } from "@reduxjs/toolkit/query/react";
 import baseQueryWithReauth from "../baseQueryWithReauth/baseQueryWithReauth";
 
@@ -85,6 +91,15 @@ export const userApi = createApi({
       }),
       invalidatesTags: ["User"],
     }),
+
+    socialLogin: build.mutation<IResponse, SocialLogin>({
+      query: (body) => ({
+        url: "/auth/social-login",
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["User"],
+    }),
   }),
 });
 
@@ -97,4 +112,5 @@ export const {
   useGetUsersQuery,
   useGetUserQuery,
   useDeleteUserMutation,
+  useSocialLoginMutation,
 } = userApi;

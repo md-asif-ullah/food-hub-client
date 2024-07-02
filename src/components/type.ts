@@ -145,3 +145,9 @@ export interface getproductResponse {
   message: string;
   payload: any;
 }
+
+export interface SocialLogin {
+  name: string | null;
+  email: string | null;
+  image: string | null;
+}
