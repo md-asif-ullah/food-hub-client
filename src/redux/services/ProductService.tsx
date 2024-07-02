@@ -3,9 +3,13 @@ import {
   ProductsResponse,
   getproductResponse,
 } from "@/components/type";
-import { baseQueryApi } from "@/pages/hooks/baseQueryWithReauth";
+import { createApi } from "@reduxjs/toolkit/query/react";
+import baseQueryWithReauth from "../baseQueryWithReauth/baseQueryWithReauth";
 
-export const productApi = baseQueryApi.injectEndpoints({
+export const productApi = createApi({
+  reducerPath: "productApi",
+  baseQuery: baseQueryWithReauth,
+  tagTypes: ["Products"],
   endpoints: (builder) => ({
     getAllProducts: builder.query<any, string>({
       query: (query) => `/products?${query}`,

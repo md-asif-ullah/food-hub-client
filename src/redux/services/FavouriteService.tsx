@@ -1,7 +1,11 @@
 import { Favourite, IResponse } from "@/components/type";
-import { baseQueryApi } from "@/pages/hooks/baseQueryWithReauth";
+import { createApi } from "@reduxjs/toolkit/query/react";
+import baseQueryWithReauth from "../baseQueryWithReauth/baseQueryWithReauth";
 
-const favouriteApi = baseQueryApi.injectEndpoints({
+const favouriteApi = createApi({
+  reducerPath: "favouriteApi",
+  baseQuery: baseQueryWithReauth,
+  tagTypes: ["Favourite"],
   endpoints: (builder) => ({
     addFavouriteProduct: builder.mutation<IResponse, Partial<Favourite>>({
       query: (body) => ({

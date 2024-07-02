@@ -1,8 +1,8 @@
 import { IContact, IResponse } from "@/components/type";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export const contectApi = createApi({
-  reducerPath: "contectApi",
+export const contactApi = createApi({
+  reducerPath: "contactApi",
   baseQuery: fetchBaseQuery({ baseUrl: "" }),
   endpoints: (builder) => ({
     addContectInfo: builder.mutation<IResponse, Partial<IContact>>({
@@ -17,4 +17,4 @@ export const contectApi = createApi({
   }),
 });
 
-export const { useAddContectInfoMutation } = contectApi;
+export const { useAddContectInfoMutation } = contactApi;

@@ -1,5 +1,6 @@
 import { ILogin, IResponse, IVerify, UserData } from "@/components/type";
-import { baseQueryApi } from "@/pages/hooks/baseQueryWithReauth";
+import { createApi } from "@reduxjs/toolkit/query/react";
+import baseQueryWithReauth from "../baseQueryWithReauth/baseQueryWithReauth";
 
 type Post = {
   gender?: string;
@@ -16,7 +17,10 @@ interface PartialType {
   body: Post;
 }
 
-export const userApi = baseQueryApi.injectEndpoints({
+export const userApi = createApi({
+  reducerPath: "userApi",
+  baseQuery: baseQueryWithReauth,
+  tagTypes: ["User"],
   endpoints: (build) => ({
     processRegister: build.mutation<IResponse, Omit<UserData, "id">>({
       query: (body) => ({

@@ -4,9 +4,14 @@ import {
   IResponse,
   IUpdatequantity,
 } from "@/components/type";
-import { baseQueryApi } from "@/pages/hooks/baseQueryWithReauth";
 
-export const cartApi = baseQueryApi.injectEndpoints({
+import { createApi } from "@reduxjs/toolkit/query/react";
+import baseQueryWithReauth from "../baseQueryWithReauth/baseQueryWithReauth";
+
+export const cartApi = createApi({
+  reducerPath: "cartApi",
+  baseQuery: baseQueryWithReauth,
+  tagTypes: ["cart"],
   endpoints: (builder) => ({
     addToCart: builder.mutation<IResponse, IAddToCartType>({
       query: (product) => ({

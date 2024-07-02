@@ -4,7 +4,6 @@ import {
   BaseQueryFn,
   FetchArgs,
   FetchBaseQueryError,
-  createApi,
 } from "@reduxjs/toolkit/query/react";
 
 const baseQuery = fetchBaseQuery({
@@ -42,10 +41,4 @@ const baseQueryWithReauth: BaseQueryFn<
   return result;
 };
 
-// Define the baseQueryApi using createApi
-export const baseQueryApi = createApi({
-  reducerPath: "baseQueryApi",
-  tagTypes: ["cart", "Products", "order", "Favourite", "User", "Contact"],
-  baseQuery: baseQueryWithReauth,
-  endpoints: (builder) => ({}),
-});
+export default baseQueryWithReauth;
