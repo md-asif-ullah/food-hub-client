@@ -39,10 +39,14 @@ function InformationSection() {
 
   const { register, handleSubmit } = useForm<IFormInfoInput>();
   const onSubmit: SubmitHandler<IFormInfoInput> = async (info) => {
-    const day = date?.getDate();
-    const month = date?.getMonth();
-    const year = date?.getFullYear();
-    const newInfo = { ...info, birthday: `${day}/${month}/${year}` };
+    const formattedDate = date?.toLocaleDateString("en-US", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    });
+    const newInfo = { ...info, birthday: formattedDate };
+
+    console.log(typeof formattedDate);
 
     try {
       const res = await updateUserInfo({ id: _id, body: newInfo }).unwrap();
@@ -109,9 +113,7 @@ function InformationSection() {
                   format(date, "PPP")
                 ) : (
                   <span>
-                    {birthday === "undefined/undefined/undefined"
-                      ? "Pick a date"
-                      : birthday}
+                    {birthday === undefined ? "Pick a date" : birthday}
                   </span>
                 )}
               </Button>
