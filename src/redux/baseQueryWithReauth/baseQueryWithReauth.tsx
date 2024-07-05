@@ -7,7 +7,7 @@ import {
 } from "@reduxjs/toolkit/query/react";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "https://food-hub.up.railway.app/api",
+  baseUrl: "/api",
 });
 
 const baseQueryWithReauth: BaseQueryFn<
