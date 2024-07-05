@@ -194,7 +194,6 @@ function Product() {
           <div className="flex items-center mt-10 space-x-2">
             <button
               onClick={() => handleSubmit()}
-              disabled={Boolean(findProduct)}
               className="secondary_button inline-flex bg-[#f58220] hover:bg-orange-700 px-4 space-x-2 text-white"
             >
               {addingProduct ? (

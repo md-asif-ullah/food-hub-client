@@ -49,15 +49,7 @@ function EditProducts() {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    console.log(
-      selectCategory,
-      inputName,
-      inputPrice,
-      inputDescription,
-      inputQuantity,
-      inputDiscount,
-      localImage
-    );
+
     const formData = new FormData();
     formData.append("name", inputName || "");
     formData.append("category", selectCategory || "");
