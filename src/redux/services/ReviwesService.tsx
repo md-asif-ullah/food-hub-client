@@ -1,9 +1,10 @@
 import { reviews } from "@/components/type";
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
+import baseQueryWithReauth from "../baseQueryWithReauth/baseQueryWithReauth";
 
 export const reviewsApi = createApi({
   reducerPath: "reviewApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "/api" }),
+  baseQuery: baseQueryWithReauth,
   tagTypes: ["reviews"],
   endpoints: (builder) => ({
     getReviews: builder.query<reviews, void>({

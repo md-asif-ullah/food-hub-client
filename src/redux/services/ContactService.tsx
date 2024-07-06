@@ -1,14 +1,15 @@
 import { IContact, IResponse } from "@/components/type";
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
+import baseQueryWithReauth from "../baseQueryWithReauth/baseQueryWithReauth";
 
 export const contactApi = createApi({
   reducerPath: "contactApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "" }),
+  baseQuery: baseQueryWithReauth,
   endpoints: (builder) => ({
     addContectInfo: builder.mutation<IResponse, Partial<IContact>>({
       query(body) {
         return {
-          url: "/api/contact",
+          url: "/contact",
           method: "POST",
           body,
         };
