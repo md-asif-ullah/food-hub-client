@@ -20,49 +20,76 @@ import { useNavigate, useParams } from "react-router-dom";
 import LoadingAnimation from "@/components/LoadingAnimation";
 import { useToast } from "@/components/ui/use-toast";
 import ProssingAnimation from "@/components/ProssingAnimation";
+import { useForm } from "react-hook-form";
+
+interface FormType {
+  name: string;
+  category: string;
+  price: number;
+  description: string;
+  image: FileList;
+  quantity: number;
+  discount: number;
+}
 
 function EditProducts() {
   const [updateProduct, { isLoading }] = useUpdateProductMutation();
   const { id } = useParams<{ id: string }>();
   const { data, isLoading: productLoading } = useGetProductQuery(id!);
 
-  const { name, price, description, quantity, discount, image, category, _id } =
-    data?.payload || {};
-
   const { toast } = useToast();
   const navigate = useNavigate();
 
-  const [localImage, setLocalImage] = useState<FileList | null>(null);
-  const [selectCategory, setSelectCategory] = useState<string>("");
-  const [inputImage, setInputImage] = useState<string>("");
-  const [inputName, setInputName] = useState<string>("");
-  const [inputPrice, setInputPrice] = useState<number>(0);
-  const [inputDescription, setInputDescription] = useState<string>("");
-  const [inputQuantity, setInputQuantity] = useState<number>(0);
-  const [inputDiscount, setInputDiscount] = useState<number>(0);
+  const [image, setImage] = useState("");
+  const [category, setCategory] = useState<string>("");
+
+  const { register, handleSubmit, watch, setValue } = useForm<FormType>({
+    defaultValues: {
+      name: data?.payload.name,
+      category: data?.payload.category,
+      price: data?.payload.price,
+      description: data?.payload.description,
+      quantity: data?.payload.quantity,
+      discount: data?.payload.discount,
+    },
+  });
 
   useEffect(() => {
-    if (localImage && localImage.length > 0) {
-      setInputImage(URL.createObjectURL(localImage[0]));
+    if (data) {
+      setValue("name", data.payload.name);
+      setValue("category", data.payload.category);
+      setValue("price", data.payload.price);
+      setValue("description", data.payload.description);
+      setValue("quantity", data.payload.quantity);
+      setValue("discount", data.payload.discount);
+      setCategory(data.payload.category);
     }
-  }, [localImage]);
+  }, [data, setValue]);
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
+  // get image from user
+  const pic = watch("image");
+  useEffect(() => {
+    if (pic && pic.length > 0) {
+      setImage(URL.createObjectURL(pic[0]));
+    }
+  }, [pic]);
+
+  const onSubmit = async (data: FormType) => {
+    const { name, price, description, image, discount, quantity } = data;
 
     const formData = new FormData();
-    formData.append("name", inputName || "");
-    formData.append("category", selectCategory || "");
-    formData.append("price", inputPrice.toString() || "");
-    formData.append("description", inputDescription || "");
-    formData.append("quantity", inputQuantity.toString() || "");
-    formData.append("discount", inputDiscount.toString() || "");
-    if (localImage && localImage.length > 0) {
-      formData.append("image", localImage[0]);
+    formData.append("name", name || "");
+    formData.append("category", category || "");
+    formData.append("price", price.toString() || "");
+    formData.append("description", description || "");
+    formData.append("quantity", quantity.toString() || "");
+    formData.append("discount", discount.toString() || "");
+    if (image && image.length > 0) {
+      formData.append("image", image[0]);
     }
 
     try {
-      const res = await updateProduct({ formData, id: _id }).unwrap();
+      const res = await updateProduct({ formData, id: id! }).unwrap();
       if (res.success) {
         navigate("/deshbord/dishes-list");
         toast({
@@ -91,7 +118,7 @@ function EditProducts() {
       {productLoading && <LoadingAnimation />}
       <form
         className="grid xl:grid-cols-3 sm:px-5 mt-10"
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onSubmit)}
       >
         {/* Image Upload */}
         <div className="mx-auto">
@@ -99,21 +126,7 @@ function EditProducts() {
             <div className="border border-[#1e293b] p-3 w-[315px] h-[315px] rounded-lg">
               <label htmlFor="input-image" className="block">
                 <div className="sm:w-72 h-72 border-2 border-[#f58220] border-dotted rounded-xl flex items-center justify-center">
-                  {inputImage ? (
-                    <div className="relative w-full h-full">
-                      <img
-                        className="w-full h-full pb-10 object-cover rounded-xl"
-                        src={inputImage}
-                        alt="Preview"
-                      />
-                      <i
-                        className="absolute bottom-3 left-1/2 cursor-pointer"
-                        onClick={() => setInputImage("")}
-                      >
-                        <ImCross className="text-white" />
-                      </i>
-                    </div>
-                  ) : (
+                  {image ? (
                     <div className="relative w-full h-full">
                       <img
                         className="w-full h-full pb-10 object-cover rounded-xl"
@@ -122,7 +135,21 @@ function EditProducts() {
                       />
                       <i
                         className="absolute bottom-3 left-1/2 cursor-pointer"
-                        onClick={() => setInputImage("")}
+                        onClick={() => setImage("")}
+                      >
+                        <ImCross className="text-white" />
+                      </i>
+                    </div>
+                  ) : (
+                    <div className="relative w-full h-full">
+                      <img
+                        className="w-full h-full pb-10 object-cover rounded-xl"
+                        src={data?.payload.image}
+                        alt="Preview"
+                      />
+                      <i
+                        className="absolute bottom-3 left-1/2 cursor-pointer"
+                        onClick={() => setImage("")}
                       >
                         <ImCross className="text-white" />
                       </i>
@@ -134,9 +161,7 @@ function EditProducts() {
                   type="file"
                   id="input-image"
                   accept="image/*"
-                  onChange={(e) => {
-                    setLocalImage(e.target.files);
-                  }}
+                  {...register("image")}
                 />
               </label>
             </div>
@@ -155,8 +180,7 @@ function EditProducts() {
             <Input
               type="text"
               placeholder="Product name"
-              defaultValue={name}
-              onChange={(e) => setInputName(e.target.value)}
+              {...register("name")}
               className="focus:border-[#f58220] mt-2 text-black dark:text-white"
             />
           </div>
@@ -164,8 +188,8 @@ function EditProducts() {
             <div className="relative z-0 w-full mb-5 group">
               <Label className="text-[#17172a] dark:text-white">Category</Label>
               <Select
-                defaultValue={category}
-                onValueChange={(value) => setSelectCategory(value)}
+                value={category}
+                onValueChange={(value) => setCategory(value)}
               >
                 <SelectTrigger className="w-full border focus:border-[#f58220] mt-2 text-[#6e798e]">
                   <SelectValue placeholder="Category" />
@@ -183,8 +207,7 @@ function EditProducts() {
               <Label className="text-[#17172a] dark:text-white">Quantity</Label>
               <Input
                 type="number"
-                defaultValue={quantity}
-                onChange={(e) => setInputQuantity(Number(e.target.value))}
+                {...register("quantity")}
                 placeholder="Quantity"
                 className="focus:border-[#f58220] mt-2 text-black dark:text-white"
               />
@@ -196,8 +219,7 @@ function EditProducts() {
               <Label className="text-[#17172a] dark:text-white">Price</Label>
               <Input
                 type="number"
-                defaultValue={price}
-                onChange={(e) => setInputPrice(Number(e.target.value))}
+                {...register("price")}
                 placeholder="Price"
                 className="focus:border-[#f58220] mt-2 text-black dark:text-white"
               />
@@ -206,8 +228,7 @@ function EditProducts() {
               <Label className="text-[#17172a] dark:text-white">Discount</Label>
               <Input
                 type="number"
-                defaultValue={discount}
-                onChange={(e) => setInputDiscount(Number(e.target.value))}
+                {...register("discount")}
                 placeholder="Discount"
                 className="focus:border-[#f58220] mt-2 text-black dark:text-white"
               />
@@ -219,8 +240,7 @@ function EditProducts() {
             </Label>
             <Textarea
               className="textarea_style"
-              defaultValue={description}
-              onChange={(e) => setInputDescription(e.target.value)}
+              {...register("description")}
               placeholder="Type your message here."
             />
           </div>
