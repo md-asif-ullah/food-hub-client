@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { RiMenu3Line } from "react-icons/ri";
 import { RxCross2 } from "react-icons/rx";
@@ -11,6 +11,7 @@ import { useTheme } from "@/theme/useTheme";
 import { ModeToggle } from "@/theme/modeToggle";
 import { SubmitHandler, useForm } from "react-hook-form";
 import useUser from "../hooks/useUser";
+import { Separator } from "@/components/ui/separator";
 
 interface page {
   name: string;
@@ -87,6 +88,10 @@ const Navbar = () => {
     navigate(`/dishes?${urlparams.toString()}`);
   };
 
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
+
   return (
     <nav className="dark:bg-[#030617] bg-white fixed z-10 w-full top-0 ">
       <div className="px-4 sm:px-6 lg:px-10 border-gray-300 border-b dark:border-b-0">
@@ -141,29 +146,24 @@ const Navbar = () => {
               <UserAccount style="mr-5" />
             </div>
           ) : (
-            <div className="sm:inline-flex rounded-md shadow-sm hidden">
-              <div className="inline-flex rounded-md shadow-sm" role="group">
-                <Link to="/login">
-                  <button className="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white">
-                    Login
-                  </button>
-                </Link>
-
-                <Link to="/register">
-                  <button className="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-e-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white">
-                    Register
-                  </button>
-                </Link>
-              </div>
+            <div className="sm:flex hidden h-5 items-center space-x-4 text-sm">
+              <Link to="/login">
+                <button className="text-gray-700 hover:text-[#f58220] dark:hover:text-[#f58220] dark:text-gray-300 ">
+                  Login
+                </button>
+              </Link>
+              <Separator orientation="vertical" />
+              <Link to="/register">
+                <button className="text-gray-700 dark:text-gray-300 dark:hover:text-[#f58220] hover:text-[#f58220]">
+                  Register
+                </button>
+              </Link>
             </div>
           )}
           {/* Mobile Navbar */}
 
           <div className="flex items-center lg:hidden">
-            <button
-              onClick={toggleNavbar}
-              className=" dark:text-gray-300  hover:bg-gray-700 hover:text-white pl-3 py-2 rounded-md text-sm font-medium"
-            >
+            <button onClick={toggleNavbar} className="ml-2">
               {isOpen ? (
                 <RxCross2 className="block h-6 w-6" />
               ) : (
