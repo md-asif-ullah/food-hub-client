@@ -3,6 +3,7 @@ import OrderCart from "./OrderCart";
 import { IOrder } from "@/components/type";
 import LoadingAnimation from "@/components/LoadingAnimation";
 import useUser from "@/pages/hooks/useUser";
+import { Helmet } from "react-helmet-async";
 
 function UserOrder() {
   const user = useUser();
@@ -10,6 +11,9 @@ function UserOrder() {
 
   return (
     <div className="min-h-screen h-full bg-white dark:bg-[#020817] p-4 space-y-10 pb-20">
+      <Helmet>
+        <title>My Orders | Best Online Restaurant</title>
+      </Helmet>
       {isLoading && <LoadingAnimation />}
       {isError && <p>something went wrong</p>}
       {data?.payload?.length === 0 && (
