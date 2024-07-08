@@ -98,5 +98,5 @@
 }
 
 .Button_style {
-  @apply text-white mt-5 bg-[#f58220] hover:bg-orange-700 duration-500;
+  @apply text-white mt-5 bg-[#f58220] duration-500;
 }

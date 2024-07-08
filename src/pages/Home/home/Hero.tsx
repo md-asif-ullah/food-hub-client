@@ -4,6 +4,7 @@ import avatar2 from "@/assets/images/HomeImg/avatar1-lkSFncXM.png";
 import avatar3 from "@/assets/images/HomeImg/avatar2-e3ZdIYj6.png";
 import { IoIosStar } from "react-icons/io";
 import { MdOutlineSlowMotionVideo } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 function Hero() {
   return (
@@ -21,9 +22,11 @@ function Hero() {
           food for you!
         </p>
         <div className="inline-grid md:inline-flex gap-4 mt-7">
-          <button className="text-white bg-[#e1781f] py-3 px-8 rounded-full font-bold">
-            Order Now
-          </button>
+          <Link to="/dishes">
+            <button className="text-white bg-[#e1781f] py-3 px-8 rounded-full font-bold">
+              Order Now
+            </button>
+          </Link>
           <button className="inline-flex ">
             <MdOutlineSlowMotionVideo className="text-6xl text-[#f9cb15]" />
             <span className="text-xl ml-2 text-[#e1781f] mt-4">

@@ -157,7 +157,7 @@ function Register() {
           <Button
             type="submit"
             disabled={isLoading}
-            className="Button_style w-full"
+            className="Button_style hover:bg-orange-700 w-full"
           >
             {isLoading ? <ProssingAnimation /> : "Register"}
           </Button>
