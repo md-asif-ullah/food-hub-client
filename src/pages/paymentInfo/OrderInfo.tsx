@@ -21,7 +21,7 @@ interface FormType {
   message: string;
 }
 
-function PaymentInfo() {
+function OrderInfo() {
   const [totalPayAmount, setTotalPayAmount] = useState<number>(0);
   const [selectePaymentOption, setSelectePaymentOption] = useState("");
   const [error, setError] = useState<string>("");
@@ -92,11 +92,11 @@ function PaymentInfo() {
   };
 
   return (
-    <form className="" onSubmit={handleSubmit(onSubmit)}>
-      <div className="pt-28 xl:px-14 px-5 grid grid-cols-8 gap-20 bg-white dark:bg-[#020617]">
-        <div className="text-white min-h-[80vh] col-span-5">
-          <div className="xl:col-span-2 mt-14 xl:mt-0 ">
-            <div className="grid grid-cols-2 gap-6">
+    <form className="p-5 md:px-14" onSubmit={handleSubmit(onSubmit)}>
+      <div className="xl:pt-28 lg:pt-20 pt-10 lg:grid lg:grid-cols-10 gap-10 xl:gap-20 bg-white dark:bg-[#020617]">
+        <div className="text-white min-h-[80vh] col-span-6">
+          <div className="xl:col-span-2 mt-14 xl:mt-0">
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
               <div className="relative z-0 w-full mb-5 group">
                 <Label className="text-[#17172a] dark:text-white">Name</Label>
                 <Input
@@ -114,7 +114,8 @@ function PaymentInfo() {
               </div>
               <div className="relative z-0 w-full mb-5 group">
                 <Label className="text-[#17172a] dark:text-white">
-                  Company Name (Optional)
+                  Company Name
+                  <span className="hidden sm:inline"> (Optional)</span>
                 </Label>
                 <Input
                   type="text"
@@ -144,7 +145,7 @@ function PaymentInfo() {
             <div className="relative z-0 w-full mb-5 group">
               <Label className="text-[#17172a] dark:text-white">Address </Label>
               <Textarea
-                className=" focus:border-[#f58220] mt-2 pb-16 text-black dark:text-white"
+                className="focus:border-[#f58220] mt-2 pb-16 text-black dark:text-white"
                 {...register("address", { required: true })}
                 placeholder="Enter your address (e.g. 123 Main St, New York, NY 10030)"
                 defaultValue={address}
@@ -164,7 +165,7 @@ function PaymentInfo() {
             <RadioGroup
               name="paymentMethod"
               onChange={handleChange}
-              className="flex justify-between max-w-[656px] h-[200px] border border-[#e2e8f0] dark:border-[#1e293b] rounded-lg px-20 py-10"
+              className="flex flex-col sm:flex-row justify-between items-center max-w-[656px] h-auto border border-[#e2e8f0] dark:border-[#1e293b] rounded-lg px-10 py-5 space-y-5 sm:space-y-0 sm:space-x-5"
             >
               <div className="flex flex-col items-center space-y-5 cursor-pointer">
                 <Label
@@ -196,8 +197,8 @@ function PaymentInfo() {
             </RadioGroup>
           </div>
           {error && <span className="text-red-700">{error}</span>}
-          <div className=" mt-10">
-            <h1 className="text-xl font-semibold mb-4">
+          <div className="mt-10">
+            <h1 className="text-xl font-semibold mb-4 text-black dark:text-white">
               Additional Information
             </h1>
             <div className="relative z-0 w-full mb-5">
@@ -205,19 +206,14 @@ function PaymentInfo() {
                 Message (optional)
               </Label>
               <Textarea
-                className=" focus:border-[#f58220] mt-2 pb-16 text-black dark:text-white"
-                {...register("message", { required: true })}
+                className="focus:border-[#f58220] mt-2 pb-16 text-black dark:text-white"
+                {...register("message", { required: false })}
                 placeholder="Note to the seller (e.g. special delivery instructions)"
               />
-              {errors.address && (
-                <span className="text-sm text-red-700">
-                  This field is required
-                </span>
-              )}
             </div>
           </div>
         </div>
-        <div className="col-span-3">
+        <div className="mt-10 col-span-4">
           <OrderSummary
             setTotalPayAmount={setTotalPayAmount}
             isLoading={isLoading}
@@ -228,4 +224,4 @@ function PaymentInfo() {
   );
 }
 
-export default PaymentInfo;
+export default OrderInfo;

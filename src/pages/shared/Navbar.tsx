@@ -162,8 +162,8 @@ const Navbar = () => {
           )}
           {/* Mobile Navbar */}
 
-          <div className="flex items-center lg:hidden">
-            <button onClick={toggleNavbar} className="ml-2">
+          <div className="flex items-center lg:hidden ml-4">
+            <button onClick={toggleNavbar}>
               {isOpen ? (
                 <RxCross2 className="block h-6 w-6" />
               ) : (

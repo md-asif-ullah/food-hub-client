@@ -18,7 +18,7 @@ import Dishes from "@/pages/dishes/Dishes";
 import ErrorPage from "@/pages/error/ErrorPage";
 import Favourite from "@/pages/favourite/Favourite";
 import Login from "@/pages/login/login";
-import PaymentInfo from "@/pages/paymentInfo/PaymentInfo";
+import OrderInfo from "@/pages/paymentInfo/OrderInfo";
 import Product from "@/pages/productDetails/Product";
 import Register from "@/pages/register/Register";
 import Verify from "@/pages/verify/Verify";
@@ -62,7 +62,7 @@ const router = createBrowserRouter([
         path: "/payment-info",
         element: (
           <ProtectedRoutes>
-            <PaymentInfo />
+            <OrderInfo />
           </ProtectedRoutes>
         ),
       },
