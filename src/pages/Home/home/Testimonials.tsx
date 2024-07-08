@@ -36,7 +36,7 @@ function Testimonials() {
                     />
                     <div className="ml-3">
                       <h2 className="text-white">{review.name}</h2>
-                      <Rating rating={3} />
+                      <Rating rating={review.rating} />
                     </div>
                   </div>
                   <p className="text-[#475569] mt-5">{review.comment}</p>
