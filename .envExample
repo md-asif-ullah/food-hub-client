@@ -1,0 +1,8 @@
+# firebase secrets
+
+VITE_FIREBASE_apiKey=your api key
+VITE_FIREBASE_authDomain=your auth domain
+VITE_FIREBASE_projectId= your project id
+VITE_FIREBASE_storageBucket=your storage bucket
+VITE_FIREBASE_messagingSenderId= your messaging sender id
+VITE_FIREBASE_appId= your app id

@@ -1,30 +1,52 @@
-# React + TypeScript + Vite
+# restaurant Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Introduction
 
-Currently, two official plugins are available:
+This is a full-stack restaurant application built using the MERN stack (MongoDB, Express.js, React, and Node.js). The application allows users to browse the menu, place orders, and manage their profiles.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- User authentication and authorization
+- Browse and search functionality
+- Place and track orders
+- Admin panel for managing menu items and orders
+- Responsive design
+- login using social account
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Technologies Used
 
-- Configure the top-level `parserOptions` property like this:
+- **Frontend:** React, Redux, React Router, react hook from ,shadcn/ui
+- **Backend:** Express.js, MongoDB, Mongoose
+- **Authentication:** JWT (JSON Web Tokens)
+- **Styling:** tailwind css
+- **Others:** Multer for file uploads, Cloudinary for image storage , zod for validation
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+## Clone the Frontend repository:
+
+**Frontend :**
+
+```bash
+git clone https://github.com/md-asif-ullah/food-hub-client.git
+
+cd food-hub-client
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Install Dependencies
+
+```bash
+npm i
+```
+
+**Backend :**
+
+```bash
+git clone https://github.com/md-asif-ullah/food-hub-server.git
+
+cd food-hub-server
+```
+
+Install Dependencies
+
+```bash
+npm i
+```
