@@ -4,7 +4,7 @@ import ProtectedRoutes from "@/components/ProtectedRoutes";
 
 function DeshboardComponent({ children }: { children: JSX.Element }) {
   return (
-    <div className="flex">
+    <div className="flex overflow-hidden">
       <div className=" hidden lg:flex">
         <div className="pt-28">
           <DeshboardSidebar />

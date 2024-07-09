@@ -59,7 +59,7 @@ function AdminTableBody({ order }: any) {
         {cartProducts?.map((product: any) => (
           <div
             key={product._id}
-            className="flex items-center mt-2 border-b border-gray-200"
+            className="flex items-center mt-2 border-b border-gray-200 space-x-2"
           >
             <img
               src={product.image}

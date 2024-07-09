@@ -14,18 +14,18 @@ function AdminOrders() {
   const { data, isLoading, isError } = useGetOrdersQuery();
 
   return (
-    <div className="h-full">
+    <div className="h-full pb-20">
       {isLoading && <LoadingAnimation />}
       {isError && <div>Something went wrong</div>}
       {data?.payload?.length === 0 && (
         <div className="text-center text-2xl mt-10">No Orders Found</div>
       )}
-      <div className="px-10">
-        <div className="border border-[#e2e8f0] dark:border-[#1e293b] text-2xl rounded-t-xl">
+      <div className="xl:ml-8 mx-4 xl:mx-0">
+        <div className="border border-[#e2e8f0] dark:border-[#1e293b] text-2xl rounded-t-xl xl:mr-[285px]">
           <h2 className="text-start p-5">Order History</h2>
         </div>
-        <div className="border border-[#e2e8f0] dark:border-[#1e293b] rounded-b-xl">
-          <Table className="min-w-full">
+        <div className="border border-[#e2e8f0] dark:border-[#1e293b] rounded-b-xl xl:mr-[285px] overflow-auto">
+          <Table>
             <TableHeader>
               <TableRow>
                 <TableHead>Date</TableHead>
