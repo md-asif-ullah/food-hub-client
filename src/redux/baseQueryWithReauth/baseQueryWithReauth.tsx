@@ -7,7 +7,7 @@ import {
 } from "@reduxjs/toolkit/query/react";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "https://food-hub.up.railway.app/api",
+  baseUrl: import.meta.env.VITE_APP_API_URL,
   credentials: "include",
 });
 
